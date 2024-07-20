@@ -93,7 +93,6 @@ Los repositorios analizados están listados a continuación con sus correspondie
 
 - **Lint**: Herramienta de revisión de código para detectar patrones comunes de deuda técnica.
 - **SonarQube**: Plataforma para análisis de calidad del código.
-- **Otros**: (Incluir herramientas adicionales si las hay).
 
 ## Scripts de Análisis
 
