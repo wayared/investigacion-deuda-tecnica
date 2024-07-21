@@ -72,7 +72,6 @@
 E(o, s, p) = E(4, 1, 0) = (5 + 5 + 4 + 2) + 30 + 0 = 46
 \]
 
-### Resumen
 La clase `ImagenController` presenta algunos malos olores de código, especialmente métodos largos y campos temporales. También hay violaciones del Principio de Responsabilidad Única (SRP). No se identificaron patrones de diseño faltantes significativos. El esfuerzo estimado para refactorizar esta clase es de 46 puntos.
 
 
