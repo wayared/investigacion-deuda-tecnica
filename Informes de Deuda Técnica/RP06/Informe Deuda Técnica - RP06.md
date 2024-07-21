@@ -1,344 +1,111 @@
-
 # Informe de Análisis de Deuda Técnica
+Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
-
-## Clase Analizada: `NombreClase1`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase2`
+## Clase Analizada: `Partido`
 
 ### Identificación de Olores de Código
 
 #### Acaparadores
-
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- **Método Largo (+5)**: `cargarPartido`
+- **Obsesión Primitiva (+3)**: `goles1`, `goles2`, `fecha`, `fase`, `estadio`, `ciudad`
+- **Código Duplicado (+7)**: Manejo de excepciones en `cargarPartido`
 
 #### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- **Cambio divergente (+6)**: Gestión de datos del partido y carga de datos desde archivos
 
 #### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- **Código duplicado (+7)**: Manejo de excepciones en `cargarPartido`
 
 #### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Intimidad inapropiada (+6)**: Dependencia directa de la lectura de archivos en `cargarPartido`
 
 ### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30)**: Gestión de datos de partidos y lectura de archivos para cargar instancias
+- **Principio Abierto/Cerrado (OCP) (+40)**: Dificultad para extender sin modificar la clase
+- **Principio de Inversión de Dependencias (DIP) (+45)**: Dependencia directa de la lectura de archivos
 
 ### Patrones de diseño no utilizados
-
-#### Creacionales
-
 - **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
 - **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Fachada (+20)**
 
-#### Estructurales
+---
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase3`
+## Clase Analizada: `Mundial`
 
 ### Identificación de Olores de Código
 
 #### Acaparadores
-
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- **Método Largo (+5)**: `generarMundial`
+- **Obsesión Primitiva (+3)**: `anio`, `golesAnotados`, `nEquipos`, `nPartidos`, `nAsistentes`
+- **Código Duplicado (+7)**: Manejo de excepciones en `generarMundial`
 
 #### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- **Cambio divergente (+6)**: Gestión de datos del mundial y lectura de archivos para generar instancias
 
 #### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- **Código duplicado (+7)**: Manejo de excepciones en `generarMundial`
 
 #### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Intimidad inapropiada (+6)**: Dependencia directa de la lectura de archivos en `generarMundial`
 
 ### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30)**: Gestión de datos del mundial y lectura de archivos para generar instancias
+- **Principio Abierto/Cerrado (OCP) (+40)**: Dificultad para extender sin modificar la clase
+- **Principio de Inversión de Dependencias (DIP) (+45)**: Dependencia directa de la lectura de archivos
 
 ### Patrones de diseño no utilizados
-
-#### Creacionales
-
 - **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
 - **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Fachada (+20)**
 
-#### Estructurales
+---
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase4`
+## Clase Analizada: `Jugador`
 
 ### Identificación de Olores de Código
 
 #### Acaparadores
-
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- **Obsesión Primitiva (+3)**: `nombre`, `nCamiseta`, `dt`
 
 #### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Código duplicado (+7)**: Lógica de comparación en el método `equals`
 
 ### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30)**: Gestión de información del jugador y comparación/representación en formato de texto
+- **Principio Abierto/Cerrado (OCP) (+40)**: Dificultad para extender sin modificar la clase
 
 ### Patrones de diseño no utilizados
-
-#### Creacionales
-
 - **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
 - **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Fachada (+20)**
 
-#### Estructurales
+---
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+## Clase Analizada: `Equipo`
 
-#### De comportamiento
+### Identificación de Olores de Código
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+#### Acaparadores
+- **Método Largo (+5)**: `sumarCopas`, `cargarJugadores`
+- **Obsesión Primitiva (+3)**: `pais`, `iniciales`, `copasMundiales`, `imagenEquipo`
+- **Código Duplicado (+7)**: Manejo de excepciones en `sumarCopas` y `cargarJugadores`
 
+#### Preventores de Cambio
+- **Cambio divergente (+6)**: Gestión de jugadores y lectura de archivos para sumar copas y cargar jugadores
 
+#### Dispensables
+- **Código duplicado (+7)**: Manejo de excepciones en `sumarCopas` y `cargarJugadores`
 
-Este repositorio fue obtenido de: https://github.com/AxcelVillagran/ProyectoPoo2
+#### Acopladores
+- **Intimidad inapropiada (+6)**: Dependencia directa de la lectura de archivos en `sumarCopas` y `cargarJugadores`
+
+### Violaciones de los Principios SOLID
+- **Principio de Responsabilidad Única (SRP) (+30)**: Gestión de jugadores, lectura de archivos, y manipulación de datos de copas mundiales
+- **Principio Abierto/Cerrado (OCP) (+40)**: Dificultad para extender sin modificar la clase
+- **Principio de Inversión de Dependencias (DIP) (+45)**: Dependencia directa de la lectura de archivos
+
+### Patrones de diseño no utilizados
+- **Fábrica Abstracta (+20)**
+- **Método de Fábrica (+20)**
+- **Fachada (+20)**
