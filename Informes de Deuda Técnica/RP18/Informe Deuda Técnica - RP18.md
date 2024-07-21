@@ -219,4 +219,6 @@ La clase BienvenidaController presenta varios malos olores de código, como come
 #### Cálculo del Esfuerzo de Refactorización
 [E(o,s,p)=E(6,2,0)=(6+5+2+4+5)+(30+45)+(20+25+30)=172]
 
+La clase SecondaryController presenta varios malos olores de código, como clase grande, métodos largos, comentarios innecesarios y métodos getter y setter que no agregan lógica adicional. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 172 puntos.
+
 Este repositorio fue obtenido de: https://github.com/ZarateSofia/ProyectoEDD
