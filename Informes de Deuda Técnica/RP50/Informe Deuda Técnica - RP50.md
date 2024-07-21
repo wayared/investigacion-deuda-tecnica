@@ -122,7 +122,7 @@
 - **Visitante (+35):** 
   - Podría separar un algoritmo de configuración de gráficos de la estructura de datos sobre la que opera.
 
-## Clase Analizada: WeatherChart
+## Clase Analizada: Dashboard
 
 ### Identificación de Olores de Código
 
