@@ -238,4 +238,59 @@ E(o, s, p) = E(2, 1, 0) = (5 + 2) + 30 + 0 = 37
 
 La clase `CircularDoubleLinkedList` presenta algunos malos olores de código, especialmente un método largo y comentarios generados automáticamente. También hay violaciones del Principio de Responsabilidad Única (SRP). El esfuerzo estimado para refactorizar esta clase es de 37 puntos.
 
+### Clase Analizada: `TablaCamarasController`
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
+- **Método Largo (+5):**
+  - El método `initialize` realiza múltiples tareas, como configurar columnas de tabla, agregar opciones y actualizar la lista de cámaras. Este método debería dividirse en métodos más pequeños y específicos para mejorar la legibilidad y el mantenimiento.
+
+##### Dispensables
+
+- **Comentarios (+2):**
+  - Existen muchos comentarios explicativos que podrían ser evitados si el código fuera más claro y autoexplicativo.
+
+- **Código duplicado (+7):**
+  - Los métodos `agregarOpciones`, `editarCamara`, `eliminarCamara`, y `agregarCamara` tienen estructuras similares y contienen código repetido. Estos métodos podrían ser refactorizados para eliminar duplicación.
+
+##### Abusadores de Orientación a Objetos
+
+- **Métodos *getter* y *setter* (+4):**
+  - La clase utiliza varios métodos `@FXML` sin encapsular la lógica en clases más pequeñas, lo que puede ser una señal de un diseño pobre orientado a objetos.
+
+#### Violaciones de los Principios SOLID
+
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `TablaCamarasController` viola este principio al manejar múltiples responsabilidades, como la configuración de la interfaz de usuario, la gestión de eventos y la lógica de negocio relacionada con las cámaras. Debería dividirse en diferentes clases con responsabilidades únicas.
+
+### Patrones de diseño no utilizados
+
+#### Creacionales
+
+- **Factory Method (+20):**
+  - Consejo: Usa un Factory Method para la creación de diálogos de edición y adición de cámaras. Esto podría simplificar el código y mejorar la extensibilidad.
+
+#### Estructurales
+
+- **Decorator (+25):**
+  - Consejo: Implementa el patrón Decorator para añadir funcionalidades a las cámaras de forma dinámica sin modificar la clase `Camara`.
+
+#### De comportamiento
+
+- **Command (+20):**
+  - Consejo: Usa el patrón Command para encapsular todas las solicitudes de acción en un objeto, lo que permite parametrizar los métodos `editarCamara`, `eliminarCamara` y `agregarCamara`.
+
+- **Observer (+25):**
+  - Consejo: Implementa el patrón Observer para notificar automáticamente a la tabla cuando se agregan, editan o eliminan cámaras.
+
+### Cálculo del Esfuerzo de Refactorización
+
+\[
+E(o, s, p) = E(5, 2, 0) = (5 + 2 + 7 + 4) + (30) + 0 = 48
+\]
+
+La clase `TablaCamarasController` presenta varios malos olores de código, como métodos largos, código duplicado y abuso de getters y setters. También viola el Principio de Responsabilidad Única (SRP). El esfuerzo estimado para refactorizar esta clase es de 48 puntos.
+
 Este repositorio fue obtenido de: https://github.com/rexman10/ED_Photos_P1
