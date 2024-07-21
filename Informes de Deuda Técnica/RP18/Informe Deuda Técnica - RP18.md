@@ -45,10 +45,6 @@
 
 La clase Emoji presenta varios malos olores de código, como código duplicado y envidia de características. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Abierto/Cerrado (OCP). El esfuerzo estimado para refactorizar esta clase es de 127 puntos.
 
-# Informe de Análisis de Deuda Técnica
-
-## Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
-
 ### Clase Analizada: `Seleccionador`
 
 #### Identificación de Olores de Código
@@ -105,5 +101,122 @@ La clase Emoji presenta varios malos olores de código, como código duplicado y
 [E(o,s,p)=E(2,2,0)=(2+7+5)+(30+40)+(20+25+30)=159]
 
 La clase Seleccionador presenta varios malos olores de código, como comentarios innecesarios, código duplicado y dependencia de implementación concreta. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Abierto/Cerrado (OCP). El esfuerzo estimado para refactorizar esta clase es de 159 puntos.
+
+### Clase Analizada: `BienvenidaController`
+
+#### Identificación de Olores de Código
+
+##### Dispensables
+
+- **Comentarios (+2):**
+  - Existen comentarios que podrían ser eliminados si el código fuera más claro y autoexplicativo.
+
+##### Acopladores
+
+- **Dependencia de Implementación (+5):**
+  - La clase depende directamente de implementaciones concretas de `FileInputStream`, `Image`, y `Map.Entry`, lo que dificulta la extensión y modificación de la clase.
+
+##### Cambiadores
+
+- **Métodos que Cambian Estado Externo (+5):**
+  - Los métodos `limpiarHistorial` y `cargarEmoji` realizan operaciones que cambian el estado externo del sistema, como la limpieza de la lista de emojis y la carga de archivos. Estos métodos podrían beneficiarse de una separación de la lógica de negocio de las operaciones de E/S.
+
+#### Violaciones de los Principios SOLID
+
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `BienvenidaController` tiene múltiples responsabilidades, incluyendo la gestión de la interfaz de usuario, la carga y limpieza de emojis, y la navegación entre escenas. Esta clase debería dividirse en varias clases con responsabilidades únicas.
+
+- **Principio de Inversión de Dependencias (DIP) (+45):**
+  - La clase depende directamente de implementaciones concretas en lugar de abstraer estas dependencias. Por ejemplo, en lugar de depender directamente de `FileInputStream`, podría depender de una interfaz que maneje la lectura de archivos.
+
+#### Patrones de diseño no utilizados
+
+#### Creacionales
+
+- **Factory Method (+20):**
+  - Podría usarse para encapsular la creación de objetos `Image`, permitiendo una creación más flexible y centralizada de estos objetos.
+
+    **Consejo:** Utilizar el patrón Factory Method para centralizar la creación de objetos `Image` y `ImageView`.
+
+#### Estructurales
+
+- **Composite (+25):**
+  - Podría implementarse para manejar la estructura de la interfaz gráfica de usuario, permitiendo tratar tanto a los componentes individuales como a las estructuras compuestas de manera uniforme.
+
+    **Consejo:** Implementar un patrón Composite para manejar los componentes de la interfaz gráfica de usuario.
+
+#### De comportamiento
+
+- **Observer (+30):**
+  - Podría utilizarse para notificar automáticamente a la interfaz de usuario cuando se produce un cambio en los datos del modelo, en lugar de tener que actualizar manualmente la interfaz.
+
+    **Consejo:** Utilizar el patrón Observer para actualizar automáticamente la interfaz de usuario cuando se cambian los datos del modelo.
+    
+####Cálculo del Esfuerzo de Refactorización
+
+[E(o,s,p)=E(2,2,0)=(2+5+5)+(30+45)+(20+25+30)=164]
+
+La clase BienvenidaController presenta varios malos olores de código, como comentarios innecesarios, dependencia de implementación concreta y métodos que cambian el estado externo. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 164 puntos.
+
+### Clase Analizada: `SecondaryController`
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
+- **Clase Grande (+6):**
+  - La clase `SecondaryController` maneja múltiples responsabilidades, incluyendo la gestión de eventos de interfaz de usuario, la carga de imágenes, la manipulación de partes de un emoji y la lógica de negocio para el guardado y la exportación. Debería dividirse en clases más pequeñas y especializadas.
+
+- **Método Largo (+5):**
+  - `initialize`: Este método realiza múltiples operaciones de inicialización, haciéndolo largo y difícil de mantener.
+
+##### Dispensables
+
+- **Comentarios (+2):**
+  - Existen comentarios que podrían ser eliminados si el código fuera más claro y autoexplicativo.
+
+##### Abusadores de Orientación a Objetos
+
+- **Métodos *getter* y *setter* (+4):**
+  - La clase tiene varios métodos *getter* y *setter* que no agregan lógica adicional, lo cual puede ser una señal de un diseño pobre orientado a objetos.
+
+##### Cambiadores
+
+- **Métodos que Cambian Estado Externo (+5):**
+  - Los métodos `guardarEmoji`, `agregarComponentes` y `mostrarPartes` realizan operaciones que cambian el estado externo del sistema, como la manipulación de la interfaz de usuario y la escritura de archivos.
+
+#### Violaciones de los Principios SOLID
+
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `SecondaryController` tiene múltiples responsabilidades, incluyendo la gestión de la interfaz de usuario, la manipulación de partes del emoji, y la lógica de guardado y exportación. Esta clase debería dividirse en varias clases con responsabilidades únicas.
+
+- **Principio de Inversión de Dependencias (DIP) (+45):**
+  - La clase depende directamente de implementaciones concretas en lugar de abstraer estas dependencias. Por ejemplo, en lugar de depender directamente de `File`, `Image`, y `ImageView`, podría depender de interfaces o abstracciones.
+
+#### Patrones de diseño no utilizados
+
+#### Creacionales
+
+- **Factory Method (+20):**
+  - Podría usarse para encapsular la creación de objetos `ImageView`, permitiendo una creación más flexible y centralizada de estos objetos.
+
+    **Consejo:** Utilizar el patrón Factory Method para centralizar la creación de objetos `ImageView`.
+
+#### Estructurales
+
+- **Composite (+25):**
+  - Podría implementarse para manejar la estructura del panel de emojis, permitiendo tratar tanto a los componentes individuales como a las estructuras compuestas de manera uniforme.
+
+    **Consejo:** Implementar un patrón Composite para manejar los componentes del panel de emojis.
+
+#### De comportamiento
+
+- **Observer (+30):**
+  - Podría utilizarse para notificar automáticamente a la interfaz de usuario cuando se produce un cambio en los datos del modelo, en lugar de tener que actualizar manualmente la interfaz.
+
+    **Consejo:** Utilizar el patrón Observer para actualizar automáticamente la interfaz de usuario cuando se cambian los datos del modelo.
+
+#### Cálculo del Esfuerzo de Refactorización
+[E(o,s,p)=E(6,2,0)=(6+5+2+4+5)+(30+45)+(20+25+30)=172]
 
 Este repositorio fue obtenido de: https://github.com/ZarateSofia/ProyectoEDD
