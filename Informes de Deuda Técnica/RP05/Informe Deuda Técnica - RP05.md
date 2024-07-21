@@ -1,344 +1,184 @@
-
 # Informe de Análisis de Deuda Técnica
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+## Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-## Clase Analizada: `NombreClase1`
+### Clase Analizada: `Cliente`
 
-### Identificación de Olores de Código
+#### Identificación de Olores de Código
 
-#### Acaparadores
+**Acaparadores**
 
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- Método Largo (+5):
+  - `reservarHospedaje`
+  - `reservarTransporte`
+  - `reservarEntretenimiento`
+- Clase Grande (+6): 
+  - La clase `Cliente` maneja múltiples responsabilidades.
+- Obsesión Primitiva (+3):
+  - Uso de tipos primitivos para `fecha`, `fechaEntrada`, `fechaSalida`.
+- Código duplicado (+7):
+  - Lógica de validación de fechas repetida.
 
-#### Abusadores de Orientación a Objetos
+**Abusadores de Orientación a Objetos**
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- Sentencias Switch (+5):
+  - Uso de `switch` en `reservarHospedaje`.
+- Intimidad inapropiada (+6):
+  - La clase `Cliente` accede directamente a los archivos del sistema mediante la clase `Funcion`.
 
-#### Preventores de Cambio
+**Preventores de Cambio**
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- Cambio divergente (+6):
+  - La clase maneja varias responsabilidades, lo que dificulta los cambios sin afectar otras funcionalidades.
 
-#### Dispensables
+**Dispensables**
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- Comentarios (+2):
+  - Comentarios excesivos que describen el funcionamiento del código en lugar de su propósito.
 
-#### Acopladores
+**Acopladores**
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- Envidia de características (+5):
+  - Métodos que realizan demasiadas tareas.
+- Cadenas de mensajes (+7):
+  - Métodos que llaman a otros métodos en secuencia.
 
-### Violaciones de los Principios SOLID
+#### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- Principio de Responsabilidad Única (SRP) (+30)
+- Principio Abierto/Cerrado (OCP) (+40)
+- Principio de Inversión de Dependencias (DIP) (+45)
 
-### Patrones de diseño no utilizados
+#### Patrones de diseño no utilizados
 
-#### Creacionales
+**Creacionales**
+- Constructor (+25)
+- Método de Fábrica (+20)
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+**Estructurales**
+- Adaptador (+25)
+- Compuesto (+30)
 
-#### Estructurales
+**De comportamiento**
+- Estrategia (+20)
+- Método Plantilla (+25)
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+---
 
-#### De comportamiento
+### Clase Analizada: `Pago`
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+#### Identificación de Olores de Código
 
-## Clase Analizada: `NombreClase2`
+**Acaparadores**
 
-### Identificación de Olores de Código
+- Obsesión Primitiva (+3):
+  - Uso de tipos primitivos para `fechaDePago`, `fechaCaducidad`, `numeroMetodoPago`.
+- Clase Grande (+6): 
+  - La clase `Pago` tiene responsabilidades que podrían delegarse.
 
-#### Acaparadores
+**Preventores de Cambio**
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- Cambio divergente (+6):
+  - La clase maneja la generación de identificadores y representación en texto.
 
-#### Abusadores de Orientación a Objetos
+**Acopladores**
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- Intimidad inapropiada (+6):
+  - Dependencia directa de la clase `Funcion` para la generación de identificadores.
 
-#### Preventores de Cambio
+#### Violaciones de los Principios SOLID
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
+- Principio de Responsabilidad Única (SRP) (+30)
+- Principio Abierto/Cerrado (OCP) (+40)
+- Principio de Inversión de Dependencias (DIP) (+45)
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+#### Patrones de diseño no utilizados
 
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+**Creacionales**
+- Método de Fábrica (+20)
 
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase3`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
+**Estructurales**
+- Adaptador (+25)
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+**De comportamiento**
+- Estrategia (+20)
 
-#### Abusadores de Orientación a Objetos
+---
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+### Clase Analizada: `Reserva`
 
-#### Preventores de Cambio
+#### Identificación de Olores de Código
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
+**Acaparadores**
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- Clase Grande (+6):
+  - La clase `Reserva` maneja la generación de números de reserva y representación en texto.
+- Obsesión Primitiva (+3):
+  - Uso de tipos primitivos para `fechaReserva`, `desde`, `hasta`.
 
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+**Preventores de Cambio**
 
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase4`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-
-
-Este repositorio fue obtenido de: https://github.com/CarlosAlvia/Proyecto-Poo
+- Cambio divergente (+6):
+  - La clase maneja varias responsabilidades que podrían dividirse.
+
+**Acopladores**
+
+- Intimidad inapropiada (+6):
+  - Dependencia directa de la clase `Funcion` para la generación de números de reserva.
+
+#### Violaciones de los Principios SOLID
+
+- Principio de Responsabilidad Única (SRP) (+30)
+- Principio Abierto/Cerrado (OCP) (+40)
+- Principio de Inversión de Dependencias (DIP) (+45)
+
+#### Patrones de diseño no utilizados
+
+**Creacionales**
+- Método de Fábrica (+20)
+
+**Estructurales**
+- Adaptador (+25)
+
+**De comportamiento**
+- Estrategia (+20)
+
+---
+
+### Clase Analizada: `Hospedaje`
+
+#### Identificación de Olores de Código
+
+**Acaparadores**
+
+- Clase Grande (+6):
+  - La clase `Hospedaje` maneja tanto hoteles como departamentos.
+- Obsesión Primitiva (+3):
+  - Uso de tipos primitivos para `fechaEntrada`, `fechaSalida`, `precioH`.
+
+**Dispensables**
+
+- Código duplicado (+7):
+  - Métodos `mostrarReserva` y `mostrarReservaDe` tienen código similar.
+
+**Acopladores**
+
+- Intimidad inapropiada (+6):
+  - Dependencia directa de clases de bajo nivel.
+
+#### Violaciones de los Principios SOLID
+
+- Principio de Responsabilidad Única (SRP) (+30)
+- Principio Abierto/Cerrado (OCP) (+40)
+
+#### Patrones de diseño no utilizados
+
+**Creacionales**
+- Método de Fábrica (+20)
+
+**Estructurales**
+- Compuesto (+30)
+
+**De comportamiento**
+- Estrategia (+20)
+- Método Plantilla (+25)
