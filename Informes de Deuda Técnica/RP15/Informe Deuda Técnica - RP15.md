@@ -205,16 +205,6 @@
 - **Cambio divergente (+6):**
   - La clase `Jugador` podría tener múltiples razones para cambiar, especialmente si se agregan nuevas reglas de verificación de tablero o se modifican las existentes.
 
-#### Dispensables
-
-- **Clase de datos (+5):**
-  - No se han identificado clases de datos sin comportamiento significativo en la clase `Jugador`.
-
-#### Acopladores
-
-- **Intimidad inapropiada (+6):**
-  - No se ha identificado intimidad inapropiada en la clase `Jugador`.
-
 ### Violaciones de los Principios SOLID
 
 - **Principio de Responsabilidad Única (SRP) (+30)**
@@ -278,38 +268,12 @@
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
-
-- **Método Largo (+5):**
-  - No se han identificado métodos largos en la clase `Contador`.
-
-- **Clase Grande (+6):**
-  - No se han identificado múltiples responsabilidades en la clase `Contador`.
-
-#### Abusadores de Orientación a Objetos
-
-- **Sentencias Switch (+5):**
-  - No se han identificado sentencias switch en la clase `Contador`.
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-  - No se han identificado múltiples razones para cambiar en la clase `Contador`.
-
 #### Dispensables
 
-- **Clase de datos (+5):**
-  - No se han identificado clases de datos sin comportamiento significativo en la clase `Contador`.
-
-#### Acopladores
-
-- **Intimidad inapropiada (+6):**
-  - No se ha identificado intimidad inapropiada en la clase `Contador`.
+- **Código duplicado (+7):**
+  - La llamada al método `juego.masUnSegundo()` se repite en cada iteración del bucle `while`.
 
 ### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-  - La clase `Contador` tiene la responsabilidad de gestionar el tiempo del juego, lo cual es una única responsabilidad clara.
 
 - **Principio Abierto/Cerrado (OCP) (+40)**
   - La clase `Contador` no es fácilmente extensible sin modificar su código fuente, especialmente en el método `run`.
@@ -318,16 +282,6 @@
   - La clase `Contador` depende directamente de la implementación concreta de `Juego` en lugar de una abstracción.
 
 ### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-  - Podría utilizarse para crear diferentes configuraciones de `Juego` sin especificar sus clases concretas.
-
-#### Estructurales
-
-- **Adaptador (+25)**
-  - Podría utilizarse para permitir que clases con interfaces incompatibles trabajen juntas, especialmente en la gestión del tiempo del juego.
 
 #### De comportamiento
 
@@ -342,7 +296,6 @@
 
 - **Método Plantilla (+25)**
   - Podría definir el esqueleto de un algoritmo de gestión del tiempo del juego en una operación, dejando algunos pasos a las subclases.
-
 
 
 
