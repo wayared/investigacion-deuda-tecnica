@@ -1,344 +1,48 @@
-
 # Informe de Análisis de Deuda Técnica
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+## Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-## Clase Analizada: `NombreClase1`
+### Clase Analizada: `Emoji`
 
-### Identificación de Olores de Código
+#### Identificación de Olores de Código
 
-#### Acaparadores
+##### Dispensables
 
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- **Código Duplicado (+7):**
+  - Los métodos `setImageCuerpo`, `setImageOjos`, `setImageBoca`, `setImageAccesorios` y `setImageCejas` tienen código muy similar. La única diferencia es el campo que se está evaluando y el tamaño de la imagen que se establece. Esta duplicación puede ser refactorizada para reducir el tamaño del código y hacerlo más mantenible. La repetición de lógica en estos métodos incrementa la probabilidad de errores y dificulta el mantenimiento.
 
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
+##### Acopladores
 
 - **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+  - La clase `Emoji` accede y manipula intensamente objetos de la clase `ImageView`, lo cual podría sugerir que parte de esta funcionalidad debería pertenecer a una clase relacionada con la presentación de la imagen. La clase `Emoji` debería centrarse únicamente en la lógica de negocio, dejando la lógica de presentación a otra clase.
 
-### Violaciones de los Principios SOLID
+#### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `Emoji` tiene múltiples responsabilidades: almacenar datos de partes del emoji y manejar la visualización de imágenes de esas partes. Esta clase podría beneficiarse de una separación de responsabilidades, creando una clase específica para manejar la lógica de visualización de las imágenes. Actualmente, cualquier cambio en la lógica de presentación afectará esta clase.
+
+- **Principio de Abierto/Cerrado (OCP) (+40):**
+  - La clase `Emoji` no es fácilmente extensible sin modificar su código fuente, especialmente en el método `settearPartes`. Si se quisiera añadir una nueva parte del emoji, sería necesario modificar este método. Esto va en contra del principio de que las clases deben estar abiertas para la extensión, pero cerradas para la modificación.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Método de Fábrica (+20):**
+  - Podría usarse para encapsular la creación de `ImageView` en un método separado, permitiendo crear instancias de `ImageView` basadas en diferentes partes del emoji sin duplicar el código.
+
+    **Consejo:** Utilizar un Método de Fábrica para centralizar la creación de los objetos `ImageView` y así evitar la duplicación de código.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Adaptador (+25):**
+  - Podría utilizarse para permitir que `Emoji` y `ImageView` trabajen juntos de manera más efectiva, especialmente si `ImageView` proviene de una biblioteca de terceros y no se puede modificar directamente.
 
-#### De comportamiento
+    **Consejo:** Implementar un Adaptador para que la clase `Emoji` pueda interactuar de manera más flexible con `ImageView`.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
 
-## Clase Analizada: `NombreClase2`
+[E(o,s,p)=E(1,2,0)=(7+5)+(30+40)+(20+25)=127]
 
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase3`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase4`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-
+La clase Emoji presenta varios malos olores de código, como código duplicado y envidia de características. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Abierto/Cerrado (OCP). El esfuerzo estimado para refactorizar esta clase es de 127 puntos.
 
 Este repositorio fue obtenido de: https://github.com/ZarateSofia/ProyectoEDD
