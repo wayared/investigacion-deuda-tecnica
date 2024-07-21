@@ -11,46 +11,18 @@
 - **Método Largo (+5):** 
   - `guardarImagen` (es largo y realiza múltiples tareas)
   - `llenarCampos` (realiza muchas tareas y contiene lógica compleja)
-- **Clase Grande (+6):** No
-- **Obsesión Primitiva (+3):** No
-- **Lista de Parámetros Largos (+4):** No
-- **Grupos de Datos (+3):** No
 
 ##### Abusadores de Orientación a Objetos
-- **Clases Alternativas con Diferentes Interfaces (+7):** No
-- **Legado Rechazado (+6):** No
-- **Sentencias Switch (+5):** No
 - **Campos Temporales (+4):** 
   - `InputStream input` (en `llenarCampos` se utiliza temporalmente)
-
-##### Preventores de Cambio
-- **Cambio divergente (+6):** No
-- **Jerarquías de herencia paralela (+7):** No
-- **Cirugía de escopeta (+8):** No
 
 ##### Dispensables
 - **Comentarios (+2):** 
   - Comentarios explicativos en diversas partes del código en lugar de utilizar nombres de métodos y variables más claros.
-- **Código duplicado (+7):** No
-- **Clase de datos (+5):** No
-- **Código muerto (+3):** No
-- **Clase perezosa (+4):** No
-- **Generalidad especulativa (+5):** No
-
-##### Acopladores
-- **Envidia de características (+5):** No
-- **Intimidad inapropiada (+6):** No
-- **Clase de biblioteca incompleta (+4):** No
-- **Cadenas de mensajes (+7):** No
-- **Hombre medio (+6):** No
 
 ### Violaciones de los Principios SOLID
 - **Principio de Responsabilidad Única (SRP) (+30):** 
   - La clase `ImagenController` maneja múltiples responsabilidades como cargar imágenes, guardar datos, y manejar la interfaz de usuario.
-- **Principio Abierto/Cerrado (OCP) (+40):** No
-- **Principio de Sustitución de Liskov (LSP) (+35):** No
-- **Principio de Segregación de Interfaces (ISP) (+25):** No
-- **Principio de Inversión de Dependencias (DIP) (+45):** No
 
 ### Patrones de diseño no utilizados
 
