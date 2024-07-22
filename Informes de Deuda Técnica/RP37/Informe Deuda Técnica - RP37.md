@@ -1,4 +1,3 @@
-
 # Informe de Análisis de Deuda Técnica
 
 # Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
@@ -338,7 +337,5 @@
 * **Estrategia (+20)**
 * **Método Plantilla (+25)**
 * **Visitante (+35)**
-
-
 
 Este repositorio fue obtenido de: https://github.com/Fausto-Briones/LP-Proyecto2

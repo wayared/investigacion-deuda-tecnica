@@ -1,344 +1,61 @@
-
 # Informe de Análisis de Deuda Técnica
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
-
-## Clase Analizada: `NombreClase1`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase2`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase3`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase4`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-
-
-Este repositorio fue obtenido de: https://github.com/Neoterux/comelec-core
+## Reporte de Calidad del Proyecto
+
+### Resumen
+El proyecto contiene los siguientes archivos y carpetas:
+- **.editorconfig**
+- **.env.example**
+- **.gitattributes**
+- **.php-cs-fixer.php**
+- **app**
+- **artisan**
+- **bootstrap**
+- **composer.json**
+- **composer.lock**
+- **config**
+- **database**
+- **package.json**
+- **phpunit.xml**
+- **public**
+- **README.md**
+- **resources**
+- **routes**
+- **storage**
+- **tests**
+- **tools**
+- **vite.config.js**
+
+A continuación se evaluarán las falencias encontradas, asignándoles puntos según el nivel de baja calidad del código.
+
+### Falencias Identificadas
+
+#### 1. `README.md`
+**Descripción Incompleta (+8)**: La documentación es básica y no proporciona detalles suficientes sobre la configuración, uso y estructura del proyecto. Un README bien detallado es esencial para que otros desarrolladores puedan entender y contribuir al proyecto sin problemas.
+
+#### 2. `.env.example`
+**Variables de Entorno Insuficientes (+4)**: El archivo de ejemplo de variables de entorno debería incluir todas las variables necesarias para ejecutar el proyecto correctamente, con explicaciones sobre cada una de ellas.
+
+#### 3. `composer.json`
+- **Dependencias No Especificadas (+4)**: Falta de especificación precisa de versiones para algunas dependencias, lo cual puede llevar a problemas de compatibilidad.
+- **Falta de Scripts Útiles (+4)**: Podrían añadirse más scripts útiles para tareas comunes como pruebas, linting, y despliegue.
+
+#### 4. `phpunit.xml`
+**Configuración de Pruebas Incompleta (+4)**: La configuración para PHPUnit podría ser más exhaustiva, incluyendo configuraciones para el manejo de coberturas de código y configuraciones específicas de entorno.
+
+#### 5. `config`
+**Falta de Documentación (+12)**: Los archivos de configuración no están suficientemente documentados, lo que dificulta entender la finalidad de cada configuración y cómo ajustarlas.
+
+#### 6. `app`
+- **Código No Estructurado (+4)**: Se observan clases y métodos que no siguen un patrón claro de diseño, lo que dificulta la mantenibilidad del código.
+- **Falta de Comentarios (+4)**: La falta de comentarios hace que sea difícil entender la lógica de algunas partes del código.
+- **Manejo de Errores Inadecuado (+4)**: El manejo de errores no es consistente en toda la aplicación.
+- **Falta de Pruebas (+4)**: Muchas clases y métodos no están cubiertos por pruebas unitarias.
+
+#### 7. `routes`
+- **Falta de Documentación (+4)**: Las rutas no están documentadas adecuadamente, lo cual puede dificultar entender cómo se estructuran y utilizan.
+- **Manejo de Errores (+4)**: No se maneja adecuadamente los errores en las rutas, lo cual puede llevar a problemas en tiempo de ejecución.
+
+#### 8. `tests`
+- **Cobertura de Pruebas Insuficiente (+4)**: La cobertura de pruebas es baja, lo cual puede llevar a errores no detectados en el código.
+- **Falta de Pruebas de Integración (+4)**: Se observa una carencia de pruebas de integración que aseguren el correcto funcionamiento de los diferentes módulos del sistema.

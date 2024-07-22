@@ -86,7 +86,6 @@
 
 - **Fachada (+20):** Podría ser utilizado para simplificar la interacción con `CitasController`.
 
-
 ## Clase Analizada: `AgregarCitaController`
 
 ### Identificación de Olores de Código
@@ -107,7 +106,6 @@
 #### Preventores de Cambio
 
 - **Cambio divergente (+6):** Cualquier cambio en la lógica de cita, cliente o servicio podría afectar `AgregarCitaController`, debido a sus múltiples responsabilidades.
-
 - **Cirugía de escopeta (+8):** Cualquier cambio en las reglas de negocio podría afectar múltiples métodos dentro del controlador.
 
 #### Dispensables
@@ -190,7 +188,4 @@
 
 - **Fachada (+20):** Podría ser utilizado para simplificar la interacción con `AtencionesController`.
 
-
-
-
-Este repositorio fue obtenido de: https://github.com/Jeremy-Poveda/Medical-appointment-system-for-special-children
+Este repositorio fue obtenido de: [https://github.com/Jeremy-Poveda/Medical-appointment-system-for-special-children]()

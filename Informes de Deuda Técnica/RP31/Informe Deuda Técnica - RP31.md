@@ -1,344 +1,198 @@
-
 # Informe de Análisis de Deuda Técnica
 
 # Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-## Clase Analizada: `NombreClase1`
+## Clase Analizada: `ChooseXorOController`
 
 ### Identificación de Olores de Código
 
 #### Acaparadores
 
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- **Obsesión Primitiva (+3):** Uso de tipos primitivos en lugar de objetos de dominio más ricos.
 
 #### Abusadores de Orientación a Objetos
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- **Sentencias *Switch* (+5):** Uso de múltiples sentencias `if-else` para validaciones que podrían ser reemplazadas por polimorfismo.
 
 #### Preventores de Cambio
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- **Cambio divergente (+6):** Cualquier cambio en la lógica del controlador podría afectar `ChooseXorOController`, debido a sus múltiples responsabilidades.
+- **Cirugía de escopeta (+8):** Cualquier cambio en las reglas de negocio podría afectar múltiples métodos dentro del controlador.
 
 #### Dispensables
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- **Código duplicado (+7):** Lógica repetida en la validación de entradas y gestión de excepciones.
 
 #### Acopladores
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Envidia de características (+5):** Métodos que acceden a múltiples propiedades de otras clases, mostrando una posible necesidad de refactorización.
+- **Intimidad inapropiada (+6):** Acceso directo a propiedades de otros objetos en lugar de usar métodos de acceso.
+- **Cadenas de mensajes (+7):** Llamadas a múltiples métodos de diferentes clases en una secuencia.
+- **Hombre medio (+6):** Métodos que simplemente delegan llamadas a otros métodos sin agregar valor.
 
 ### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):** La clase `ChooseXorOController` maneja múltiples responsabilidades: validación, manipulación de UI y lógica de negocio.
+- **Principio Abierto/Cerrado (OCP) (+40):** La clase no está abierta para extensión pero cerrada para modificación. Cualquier nueva funcionalidad requiere cambios en el código existente.
+- **Principio de Segregación de Interfaces (ISP) (+25):** La clase depende de métodos que no utiliza directamente.
+- **Principio de Inversión de Dependencias (DIP) (+45):** Alta dependencia en clases concretas en lugar de abstracciones.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Fábrica Abstracta (+20):** Podría ser usado para crear diferentes tipos de controladores o vistas.
+- **Constructor (+25):** Podría mejorarse el constructor actual para manejar múltiples parámetros.
+- **Método de Fábrica (+20):** Podría ser usado para la creación de instancias.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Fachada (+20):** Podría ser utilizado para simplificar la interacción con `ChooseXorOController`.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Observador (+25):** Podría ser utilizado para observar cambios en los datos.
 
-## Clase Analizada: `NombreClase2`
+## Clase Analizada: `ChooseWhoStartsController`
 
 ### Identificación de Olores de Código
 
 #### Acaparadores
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- **Obsesión Primitiva (+3):** Uso de tipos primitivos en lugar de objetos de dominio más ricos.
 
 #### Abusadores de Orientación a Objetos
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- **Sentencias *Switch* (+5):** Uso de múltiples sentencias `if-else` para validaciones que podrían ser reemplazadas por polimorfismo.
 
 #### Preventores de Cambio
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- **Cambio divergente (+6):** Cualquier cambio en la lógica del controlador podría afectar `ChooseWhoStartsController`, debido a sus múltiples responsabilidades.
+- **Cirugía de escopeta (+8):** Cualquier cambio en las reglas de negocio podría afectar múltiples métodos dentro del controlador.
 
 #### Dispensables
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- **Código duplicado (+7):** Lógica repetida en la validación de entradas y gestión de excepciones.
 
 #### Acopladores
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Envidia de características (+5):** Métodos que acceden a múltiples propiedades de otras clases, mostrando una posible necesidad de refactorización.
+- **Intimidad inapropiada (+6):** Acceso directo a propiedades de otros objetos en lugar de usar métodos de acceso.
+- **Cadenas de mensajes (+7):** Llamadas a múltiples métodos de diferentes clases en una secuencia.
+- **Hombre medio (+6):** Métodos que simplemente delegan llamadas a otros métodos sin agregar valor.
 
 ### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):** La clase `ChooseWhoStartsController` maneja múltiples responsabilidades: validación, manipulación de UI y lógica de negocio.
+- **Principio Abierto/Cerrado (OCP) (+40):** La clase no está abierta para extensión pero cerrada para modificación. Cualquier nueva funcionalidad requiere cambios en el código existente.
+- **Principio de Segregación de Interfaces (ISP) (+25):** La clase depende de métodos que no utiliza directamente.
+- **Principio de Inversión de Dependencias (DIP) (+45):** Alta dependencia en clases concretas en lugar de abstracciones.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Fábrica Abstracta (+20):** Podría ser usado para crear diferentes tipos de controladores o vistas.
+- **Constructor (+25):** Podría mejorarse el constructor actual para manejar múltiples parámetros.
+- **Método de Fábrica (+20):** Podría ser usado para la creación de instancias.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Fachada (+20):** Podría ser utilizado para simplificar la interacción con `ChooseWhoStartsController`.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Iterador (+15):** Podría ser útil para iterar sobre listas de elementos.
+- **Observador (+25):** Podría ser utilizado para observar cambios en los datos.
 
-## Clase Analizada: `NombreClase3`
+## Clase Analizada: `Square`
+
+### Identificación de Olores de Código
+
+#### Dispensables
+
+- **Código duplicado (+7):** Se encuentra bloques de código repetidos.
+
+#### Acopladores
+
+- **Intimidad inapropiada (+6):** `ifIsComputerNextTurn` realiza llamadas a muchos métodos de otras clases.
+- **Cadenas de mensajes (+7):** Se encuentran muchos métodos llamando a métodos de otras clases de manera explícita formando una cadena de mensajes.
+
+### Violaciones de los Principios SOLID
+
+No se encontraron violaciones a los principios SOLID.
+
+### Patrones de diseño no utilizados
+
+#### Creacionales
+
+- **Constructor (+25):** Puede ser utilizado para construir y configuar de manera óptima los componentes.
+
+#### Estructurales
+
+- **Fachada (+20):** Puede ser utilizado para facilitar la interacción con el controlador.
+
+#### De comportamiento
+
+- **Estrategia (+20):** No identificado en la revisión detallada.
+- **Método Plantilla (+25):** No identificado en la revisión detallada.
+- **Visitante (+35):** No identificado en la revisión detallada.
+
+## Clase Analizada: `Board`
 
 ### Identificación de Olores de Código
 
 #### Acaparadores
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- **Método Largo (+5):** Métodos que pueden ser largos y contener lógica compleja que debería dividirse en métodos más pequeños.
+- **Clase Grande (+6):** La clase `Board` contiene múltiples responsabilidades y muchos atributos y métodos, lo que sugiere que es demasiado grande.
+- **Obsesión Primitiva (+3):** Uso de tipos primitivos en lugar de objetos de dominio más ricos.
+- **Lista de Parámetros Largos (+4):** Métodos con múltiples parámetros que podrían encapsularse en objetos.
 
 #### Abusadores de Orientación a Objetos
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+- **Sentencias *Switch* (+5):** Uso de múltiples sentencias `if-else` para validaciones que podrían ser reemplazadas por polimorfismo.
 
 #### Preventores de Cambio
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+- **Cambio divergente (+6):** Cualquier cambio en la lógica del tablero podría afectar `Board`, debido a sus múltiples responsabilidades.
+- **Cirugía de escopeta (+8):** Cualquier cambio en los procedimientos podría afectar múltiples métodos dentro de la clase.
 
 #### Dispensables
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- **Código duplicado (+7):** Lógica repetida en la validación de entradas y gestión de excepciones.
 
 #### Acopladores
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Envidia de características (+5):** Métodos que acceden a múltiples propiedades de otras clases, mostrando una posible necesidad de refactorización.
+- **Intimidad inapropiada (+6):** Acceso directo a propiedades de otros objetos en lugar de usar métodos de acceso.
+- **Cadenas de mensajes (+7):** Llamadas a múltiples métodos de diferentes clases en una secuencia.
+- **Hombre medio (+6):** Métodos que simplemente delegan llamadas a otros métodos sin agregar valor.
 
 ### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):** La clase `Board` maneja múltiples responsabilidades: lógica del tablero, validaciones y manipulaciones de datos.
+- **Principio Abierto/Cerrado (OCP) (+40):** La clase no está abierta para extensión pero cerrada para modificación. Cualquier nueva funcionalidad requiere cambios en el código existente.
+- **Principio de Segregación de Interfaces (ISP) (+25):** La clase depende de métodos que no utiliza directamente.
+- **Principio de Inversión de Dependencias (DIP) (+45):** Alta dependencia en clases concretas en lugar de abstracciones.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Fábrica Abstracta (+20):** Podría ser usado para crear diferentes tipos de tableros.
+- **Constructor (+25):** Podría mejorarse el constructor actual para manejar múltiples parámetros.
+- **Método de Fábrica (+20):** Podría ser usado para la creación de instancias.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Fachada (+20):** Podría ser utilizado para simplificar la interacción con `Board`.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Iterador (+15):** Podría ser útil para iterar sobre listas de elementos.
+- **Observador (+25):** Podría ser utilizado para observar cambios en el estado del tablero.
 
-## Clase Analizada: `NombreClase4`
+---
 
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-
-
-Este repositorio fue obtenido de: https://github.com/niplinig/Grupo_09
+Este repositorio fue obtenido de: [https://github.com/niplinig/Grupo_09]()
