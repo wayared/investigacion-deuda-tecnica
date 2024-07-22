@@ -1,343 +1,287 @@
+# Informe de Análisis de Código PHP
 
-# Informe de Análisis de Deuda Técnica
+## Clase Analizada: `LpBackend.php`
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+### Descripción General
 
-## Clase Analizada: `NombreClase1`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase2`
+El archivo `LpBackend.php` contiene una función `postDenuncia` que se encarga de recibir datos de una denuncia, validarlos, asignarles un nuevo ID, y luego enviar estos datos a una base de datos Firebase usando cURL. También incluye configuraciones de encabezados HTTP para manejar CORS.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Función Grande (+1):**
+   - La función `postDenuncia` realiza múltiples tareas, incluyendo la validación de datos, configuración y ejecución de cURL, y la manipulación de datos.
 
-#### Abusadores de Orientación a Objetos
+2. **Código Duplicado (+1):**
+   - La URL del endpoint de Firebase se utiliza varias veces en la función.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Comentarios Innecesarios (+1):**
+   - Algunos comentarios explican operaciones simples que podrían entenderse fácilmente con nombres de variables y funciones bien elegidos.
 
-#### Preventores de Cambio
+4. **Variables Temporales Innecesarias (+1):**
+   - Las variables temporales como `$response` y `$existingData` podrían manejarse directamente en las operaciones.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+5. **Uso Excesivo de Literales (+1):**
+   - Varios valores están codificados directamente en la función, como la URL de Firebase y los nombres de los campos de la denuncia.
 
-#### Dispensables
+#### Principios SOLID Violados
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - La función `postDenuncia` tiene múltiples responsabilidades: validación de datos, asignación de ID, y comunicación con la base de datos. Debería dividirse en funciones más pequeñas con responsabilidades específicas.
 
-#### Acopladores
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La función depende directamente de cURL para la comunicación HTTP. Sería mejor utilizar una abstracción para la comunicación HTTP que permita cambiar fácilmente la implementación subyacente.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+#### Patrones de Diseño no Utilizados
 
-### Violaciones de los Principios SOLID
+1. **Factory Method (+10):**
+   - Podría usarse para la creación de instancias de cURL con configuraciones personalizadas de manera más flexible y clara.
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+2. **Facade (+10):**
+   - La interacción con la base de datos de Firebase podría encapsularse dentro de una clase fachada que oculte la complejidad de las llamadas cURL.
 
-### Patrones de diseño no utilizados
+### Cálculo del Esfuerzo de Refactorización
 
-#### Creacionales
+\[
+E(o, s, p) = E(4, 2, 2) = (1 + 1 + 1 + 1) + (10 + 10) + (10 + 10) = 44
+\]
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+### Comentarios Adicionales
 
-#### Estructurales
+- **Validación de Datos:**
+  - La función valida que ciertos campos no estén vacíos, pero no verifica otros posibles errores en los datos.
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Gestión de Errores:**
+  - La función maneja errores de cURL, pero no otros posibles errores que puedan ocurrir en el proceso.
 
-#### De comportamiento
+- **Configuración de cURL:**
+  - La configuración de cURL se repite varias veces en la función. Podría beneficiarse de una función auxiliar que maneje esta configuración.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+### Recomendaciones de Refactorización
 
-## Clase Analizada: `NombreClase3`
+1. **División de Responsabilidades:**
+   - Dividir la función `postDenuncia` en varias funciones más pequeñas, cada una con una responsabilidad única, como `validarDatos`, `asignarId`, `configurarCurl`, y `enviarDatosFirebase`.
+
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Factory Method para la creación de instancias de cURL.
+   - Crear una clase fachada para manejar todas las interacciones con Firebase.
+
+3. **Encapsulamiento de Literales:**
+   - Utilizar constantes o variables de configuración para valores como la URL de Firebase y los nombres de los campos.
+
+4. **Mejora de la Gestión de Errores:**
+   - Implementar una mejor gestión de errores que incluya la validación de datos y otros posibles errores en el proceso.
+
+## Clase Analizada: `lpCambiarEstado.php`
+
+### Descripción General
+
+El archivo `lpCambiarEstado.php` contiene una función `cambiarEstado` que se encarga de cambiar el estado de una denuncia en una base de datos Firebase. Utiliza cURL para realizar las operaciones de red. También incluye configuraciones de encabezados HTTP para manejar CORS.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Función Grande (+1):**
+   - La función `cambiarEstado` realiza múltiples tareas, incluyendo la configuración de cURL, la obtención de datos, la actualización del estado y la conversión a JSON.
 
-#### Abusadores de Orientación a Objetos
+2. **Código Duplicado (+1):**
+   - La URL del endpoint de Firebase se utiliza varias veces en la función.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Comentarios Innecesarios (+1):**
+   - Algunos comentarios explican operaciones simples que podrían entenderse fácilmente con nombres de variables y funciones bien elegidos.
 
-#### Preventores de Cambio
+4. **Uso Excesivo de Literales (+1):**
+   - Varios valores están codificados directamente en la función, como la URL de Firebase y los nombres de los estados.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+#### Principios SOLID Violados
 
-#### Dispensables
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - La función `cambiarEstado` tiene múltiples responsabilidades: obtención de datos, actualización del estado y comunicación con la base de datos. Debería dividirse en funciones más pequeñas con responsabilidades específicas.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La función depende directamente de cURL para la comunicación HTTP. Sería mejor utilizar una abstracción para la comunicación HTTP que permita cambiar fácilmente la implementación subyacente.
 
-#### Acopladores
+#### Patrones de Diseño no Utilizados
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+1. **Factory Method (+10):**
+   - Podría usarse para la creación de instancias de cURL con configuraciones personalizadas de manera más flexible y clara.
 
-### Violaciones de los Principios SOLID
+2. **Facade (+10):**
+   - La interacción con la base de datos de Firebase podría encapsularse dentro de una clase fachada que oculte la complejidad de las llamadas cURL.
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+### Cálculo del Esfuerzo de Refactorización
 
-### Patrones de diseño no utilizados
+\[
+E(o, s, p) = E(4, 2, 2) = (1 + 1 + 1 + 1) + (10 + 10) + (10 + 10) = 44
+\]
 
-#### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+### Comentarios Adicionales
 
-#### Estructurales
+- **Validación de Datos:**
+  - La función valida que el ID esté presente en los datos de la solicitud, pero no verifica otros posibles errores en los datos.
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Gestión de Errores:**
+  - La función maneja errores de cURL, pero no otros posibles errores que puedan ocurrir en el proceso.
 
-#### De comportamiento
+- **Configuración de cURL:**
+  - La configuración de cURL se repite varias veces en la función. Podría beneficiarse de una función auxiliar que maneje esta configuración.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+### Recomendaciones de Refactorización
 
-## Clase Analizada: `NombreClase4`
+1. **División de Responsabilidades:**
+   - Dividir la función `cambiarEstado` en varias funciones más pequeñas, cada una con una responsabilidad única, como `obtenerDatos`, `actualizarEstado`, `configurarCurl`, y `enviarDatosFirebase`.
+
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Factory Method para la creación de instancias de cURL.
+   - Crear una clase fachada para manejar todas las interacciones con Firebase.
+
+3. **Encapsulamiento de Literales:**
+   - Utilizar constantes o variables de configuración para valores como la URL de Firebase y los nombres de los estados.
+
+4. **Mejora de la Gestión de Errores:**
+   - Implementar una mejor gestión de errores que incluya la validación de datos y otros posibles errores en el proceso.
+
+## Clase Analizada: `lpVotar.php`
+
+### Descripción General
+
+El archivo `lpVotar.php` contiene una función `incrementarVoto` que se encarga de incrementar el conteo de votos para una denuncia específica en una base de datos Firebase. Utiliza cURL para realizar las operaciones de red. También incluye configuraciones de encabezados HTTP para manejar CORS.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Función Grande (+1):**
+   - La función `incrementarVoto` realiza múltiples tareas, incluyendo la configuración de cURL, la obtención de datos, la actualización del voto y la conversión a JSON.
 
-#### Abusadores de Orientación a Objetos
+2. **Código Duplicado (+1):**
+   - La URL del endpoint de Firebase se utiliza varias veces en la función.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Uso Excesivo de Literales (+1):**
+   - Varios valores están codificados directamente en la función, como la URL de Firebase.
 
-#### Preventores de Cambio
+#### Principios SOLID Violados
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - La función `incrementarVoto` tiene múltiples responsabilidades: obtención de datos, actualización del voto y comunicación con la base de datos. Debería dividirse en funciones más pequeñas con responsabilidades específicas.
 
-#### Dispensables
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La función depende directamente de cURL para la comunicación HTTP. Sería mejor utilizar una abstracción para la comunicación HTTP que permita cambiar fácilmente la implementación subyacente.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+#### Patrones de Diseño no Utilizados
 
-#### Acopladores
+1. **Factory Method (+10):**
+   - Podría usarse para la creación de instancias de cURL con configuraciones personalizadas de manera más flexible y clara.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+2. **Facade (+10):**
+   - La interacción con la base de datos de Firebase podría encapsularse dentro de una clase fachada que oculte la complejidad de las llamadas cURL.
 
-### Violaciones de los Principios SOLID
+### Cálculo del Esfuerzo de Refactorización
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+\[
+E(o, s, p) = E(3, 2, 2) = (1 + 1 + 1) + (10 + 10) + (10 + 10) = 43
+\]
 
-### Patrones de diseño no utilizados
+### Comentarios Adicionales
 
-#### Creacionales
+- **Validación de Datos:**
+  - La función valida que el ID esté presente en los datos de la solicitud, pero no verifica otros posibles errores en los datos.
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Gestión de Errores:**
+  - La función maneja errores de cURL, pero no otros posibles errores que puedan ocurrir en el proceso.
 
-#### Estructurales
+- **Configuración de cURL:**
+  - La configuración de cURL se repite varias veces en la función. Podría beneficiarse de una función auxiliar que maneje esta configuración.
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+### Recomendaciones de Refactorización
 
-#### De comportamiento
+1. **División de Responsabilidades:**
+   - Dividir la función `incrementarVoto` en varias funciones más pequeñas, cada una con una responsabilidad única, como `obtenerDatos`, `actualizarVoto`, `configurarCurl`, y `enviarDatosFirebase`.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Factory Method para la creación de instancias de cURL.
+   - Crear una clase fachada para manejar todas las interacciones con Firebase.
+
+3. **Encapsulamiento de Literales:**
+   - Utilizar constantes o variables de configuración para valores como la URL de Firebase.
+
+4. **Mejora de la Gestión de Errores:**
+   - Implementar una mejor gestión de errores que incluya la validación de datos y otros posibles errores en el proceso.
+
+## Clase Analizada: `lpRanking.php`
+
+### Descripción General
+
+El archivo `lpRanking.php` contiene código que realiza las siguientes tareas:
+
+1. Configura los encabezados HTTP para manejar CORS.
+2. Obtiene los datos existentes de una base de datos Firebase.
+3. Ordena los datos por el atributo `voto` en orden descendente.
+4. Retorna los 10 primeros resultados como un JSON.
+
+### Identificación de Olores de Código
+
+#### Olores de Código
+
+1. **Función Grande (+1):**
+   - Todo el proceso se maneja dentro de un único bloque, lo que hace que la función sea difícil de mantener y extender.
+
+2. **Código Duplicado (+1):**
+   - La URL del endpoint de Firebase se utiliza varias veces.
+
+3. **Uso Excesivo de Literales (+1):**
+   - La URL de Firebase está codificada directamente en el código.
+
+#### Principios SOLID Violados
+
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - El archivo actual tiene múltiples responsabilidades: configuración de CORS, obtención de datos, ordenación de datos y retorno de resultados.
+
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La lógica depende directamente de cURL para realizar las solicitudes HTTP. Utilizar una abstracción para manejar estas solicitudes podría mejorar la flexibilidad.
+
+#### Patrones de Diseño no Utilizados
+
+1. **Facade (+10):**
+   - La interacción con Firebase podría encapsularse dentro de una clase fachada, mejorando la modularidad y la legibilidad.
+
+2. **Factory Method (+10):**
+   - Podría utilizarse para crear instancias de cURL con configuraciones personalizadas de manera más flexible.
+
+### Cálculo del Esfuerzo de Refactorización
+
+\[
+E(o, s, p) = E(3, 2, 2) = (1 + 1 + 1) + (10 + 10) + (10 + 10) = 43
+\]
+
+### Comentarios Adicionales
+
+- **Validación de Datos:**
+  - No hay validación para asegurarse de que los datos obtenidos de Firebase sean válidos y contengan el campo `voto`.
+
+- **Gestión de Errores:**
+  - Solo se maneja el error de cURL, pero no se manejan otros posibles errores que pueden ocurrir durante el proceso.
+
+- **Configuración de cURL:**
+  - La configuración de cURL se realiza varias veces y podría encapsularse en una función auxiliar para mejorar la legibilidad y el mantenimiento.
+
+### Recomendaciones de Refactorización
+
+1. **División de Responsabilidades:**
+   - Dividir el código en funciones más pequeñas, cada una con una responsabilidad única, como `configurarCors`, `obtenerDatos`, `ordenarDatos`, y `retornarResultados`.
+
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Factory Method para la creación de instancias de cURL.
+   - Crear una clase fachada para manejar todas las interacciones con Firebase.
+
+3. **Encapsulamiento de Literales:**
+   - Utilizar constantes o variables de configuración para valores como la URL de Firebase.
+
+4. **Mejora de la Gestión de Errores:**
+   - Implementar una mejor gestión de errores que incluya la validación de datos y otros posibles errores en el proceso.
 
 
 

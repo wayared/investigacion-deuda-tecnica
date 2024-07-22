@@ -279,4 +279,63 @@ E(o, s, p) = E(4, 2, 0) = (5 + 6 + 2 + 6) + (30 + 45) + 0 = 94
 
 La clase `MesaData` presenta varios malos olores de código, como métodos largos, uso de múltiples condicionales, y acoplamiento inapropiado. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). No se han identificado patrones de diseño faltantes significativos. El esfuerzo estimado para refactorizar esta clase es de 94 puntos.
 
+### Clase Analizada: `ComidaData`
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
+- **Método Largo (+5):**
+  - El método `cargarComidasArchivo` realiza múltiples tareas, como abrir un archivo, leer datos, dividir líneas y crear instancias de `Comida`. Este método debería dividirse en métodos más pequeños y específicos para mejorar la legibilidad y el mantenimiento.
+
+##### Dispensables
+
+- **Comentarios (+2):**
+  - Existen comentarios que describen el código en lugar de explicar el porqué del código. Estos comentarios podrían evitarse si el código fuera más claro y autoexplicativo.
+
+- **Código duplicado (+7):**
+  - Los métodos `registrarComida`, `eliminarComida` y `sobreescribirArchivoComida` tienen estructuras similares y contienen código repetido. Estos métodos podrían ser refactorizados para eliminar duplicación.
+
+##### Acopladores
+
+- **Cadenas de mensajes (+7):**
+  - El método `cargarComidasArchivo` y otros métodos dependen fuertemente en varias clases y métodos para completar sus tareas, lo que aumenta el acoplamiento y reduce la flexibilidad del código.
+
+#### Violaciones de los Principios SOLID
+
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `ComidaData` viola este principio al manejar múltiples responsabilidades, como la gestión de datos de comidas y la lectura/escritura de archivos. Debería dividirse en diferentes clases con responsabilidades únicas.
+
+- **Principio de Inversión de Dependencias (DIP) (+45):**
+  - La clase `ComidaData` depende directamente de la implementación concreta de `BufferedReader`, `BufferedWriter`, `FileReader` y `FileWriter`. En su lugar, debería depender de abstracciones que puedan ser fácilmente sustituidas.
+
+### Patrones de diseño no utilizados
+
+#### Creacionales
+
+- **Factory Method (+20):**
+  - Consejo: Usa un Factory Method para la creación de instancias de `Comida`. Esto podría simplificar el código y mejorar la extensibilidad.
+
+#### Estructurales
+
+- **Adapter (+25):**
+  - Consejo: Implementa el patrón Adapter para adaptar la lectura y escritura de archivos a una interfaz común, permitiendo cambiar fácilmente la implementación subyacente sin afectar al resto del código.
+
+#### De comportamiento
+
+- **Command (+20):**
+  - Consejo: Usa el patrón Command para encapsular todas las solicitudes de acción en un objeto, lo que permite parametrizar los métodos `registrarComida`, `eliminarComida` y `sobreescribirArchivoComida`.
+
+- **Observer (+25):**
+  - Consejo: Implementa el patrón Observer para notificar automáticamente a las listas de comidas cuando se agregan, editan o eliminan comidas.
+
+### Cálculo del Esfuerzo de Refactorización
+
+\[
+E(o, s, p) = E(21, 75, 90) = (5 + 2 + 7 + 7) + (30 + 45) + (20 + 25 + 20 + 25) = 166
+\]
+
+La clase `ComidaData` presenta varios malos olores de código, como métodos largos, código duplicado y cadenas de mensajes. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 166 puntos.
+
+
 Este repositorio fue obtenido de: https://github.com/CristopherVilla20/Proyecto2Parcial

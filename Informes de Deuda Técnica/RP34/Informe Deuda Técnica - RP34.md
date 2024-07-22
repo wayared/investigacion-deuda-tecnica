@@ -1,344 +1,249 @@
-
 # Informe de Análisis de Deuda Técnica
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+## Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-## Clase Analizada: `NombreClase1`
+### Clases Analizadas: `GestorEstudiante` y Endpoints de Sinatra
 
-### Identificación de Olores de Código
+#### Identificación de Olores de Código
 
-#### Acaparadores
+##### Acaparadores
 
-- **Método Largo** **(+5):**
 - **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+  - La clase `GestorEstudiante` maneja múltiples responsabilidades, incluyendo la lectura, escritura y gestión de datos de estudiantes. Debería dividirse en clases más pequeñas y especializadas.
 
-#### Abusadores de Orientación a Objetos
+- **Método Largo (+5):**
+  - Los métodos `write_data_to_csv` y `read_data_from_csv` realizan múltiples operaciones que podrían dividirse en métodos más pequeños y especializados.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+##### Dispensables
 
-#### Preventores de Cambio
+- **Código duplicado (+4):**
+  - En los endpoints de `POST`, `PUT` y `DELETE`, hay repetición de código para la lectura y escritura de datos en el archivo CSV.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+##### Abusadores de Orientación a Objetos
 
-#### Dispensables
+- **Métodos *getter* y *setter* (+2):**
+  - La clase `GestorEstudiante` utiliza métodos *getter* y *setter* para acceder a los datos de los estudiantes, lo cual puede ser una señal de un diseño pobre orientado a objetos.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+#### Violaciones de los Principios SOLID
 
-#### Acopladores
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `GestorEstudiante` viola este principio al manejar tanto la lógica de acceso a datos como la gestión de los estudiantes. Debería dividirse en diferentes clases con responsabilidades únicas.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Principio de Inversión de Dependencias (DIP) (+20):**
+  - Los endpoints de la API están directamente acoplados a la clase `GestorEstudiante`, lo que hace difícil cambiar la lógica de almacenamiento sin modificar los endpoints.
 
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
+#### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Factory Method (+20):**
+  - Podría usarse para crear instancias de `GestorEstudiante` con diferentes fuentes de datos de manera más flexible y clara.
+
+    **Consejo:** Utilizar el patrón Factory Method para la creación de objetos `GestorEstudiante` con fuentes de datos personalizadas.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Composite (+25):**
+  - Podría implementarse para manejar la estructura de los datos de los estudiantes, permitiendo tratar tanto a los elementos individuales como a las estructuras compuestas de manera uniforme.
+
+    **Consejo:** Implementar el patrón Composite para gestionar la estructura de los datos de los estudiantes de manera más flexible y escalable.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Strategy (+30):**
+  - Podría utilizarse para encapsular las diferentes estrategias de almacenamiento de datos (e.g., almacenamiento en CSV, almacenamiento en bases de datos) permitiendo cambiar fácilmente la estrategia de almacenamiento.
 
-## Clase Analizada: `NombreClase2`
+    **Consejo:** Utilizar el patrón Strategy para encapsular las estrategias de almacenamiento de datos y permitir cambiar la estrategia fácilmente.
 
-### Identificación de Olores de Código
+### Cálculo del Esfuerzo de Refactorización
 
-#### Acaparadores
+\[
+E(o, s, p) = E(3, 1, 0) = (6 + 5 + 4 + 2) + (30 + 20) + (20 + 25 + 30) = 142
+\]
 
-- **Método Largo (+5)****:**
+La clase `GestorEstudiante` presenta varios malos olores de código, como métodos largos y código duplicado. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 142 puntos.
+
+### Clases Analizadas: `GestorEstudianteLibros` y Endpoints de Sinatra
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
 - **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+  - La clase `GestorEstudianteLibros` maneja múltiples responsabilidades, incluyendo la lectura, escritura y gestión de datos de estudiantes y libros. Debería dividirse en clases más pequeñas y especializadas.
 
-#### Abusadores de Orientación a Objetos
+- **Método Largo (+5):**
+  - Los métodos `write_data_to_csv` y `read_data_from_csv` realizan múltiples operaciones que podrían dividirse en métodos más pequeños y especializados.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+##### Dispensables
 
-#### Preventores de Cambio
+- **Código duplicado (+4):**
+  - En los endpoints de `POST` y `DELETE`, hay repetición de código para la lectura y escritura de datos en el archivo CSV.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+##### Abusadores de Orientación a Objetos
 
-#### Dispensables
+- **Métodos *getter* y *setter* (+2):**
+  - La clase `GestorEstudianteLibros` utiliza métodos *getter* y *setter* para acceder a los datos de los estudiantes y libros, lo cual puede ser una señal de un diseño pobre orientado a objetos.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+#### Violaciones de los Principios SOLID
 
-#### Acopladores
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `GestorEstudianteLibros` viola este principio al manejar tanto la lógica de acceso a datos como la gestión de los estudiantes y libros. Debería dividirse en diferentes clases con responsabilidades únicas.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Principio de Inversión de Dependencias (DIP) (+20):**
+  - Los endpoints de la API están directamente acoplados a la clase `GestorEstudianteLibros`, lo que hace difícil cambiar la lógica de almacenamiento sin modificar los endpoints.
 
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
+#### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Factory Method (+20):**
+  - Podría usarse para crear instancias de `GestorEstudianteLibros` con diferentes fuentes de datos de manera más flexible y clara.
+
+    **Consejo:** Utilizar el patrón Factory Method para la creación de objetos `GestorEstudianteLibros` con fuentes de datos personalizadas.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Composite (+25):**
+  - Podría implementarse para manejar la estructura de los datos de los estudiantes y libros, permitiendo tratar tanto a los elementos individuales como a las estructuras compuestas de manera uniforme.
+
+    **Consejo:** Implementar el patrón Composite para gestionar la estructura de los datos de los estudiantes y libros de manera más flexible y escalable.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Strategy (+30):**
+  - Podría utilizarse para encapsular las diferentes estrategias de almacenamiento de datos (e.g., almacenamiento en CSV, almacenamiento en bases de datos) permitiendo cambiar fácilmente la estrategia de almacenamiento.
 
-## Clase Analizada: `NombreClase3`
+    **Consejo:** Utilizar el patrón Strategy para encapsular las estrategias de almacenamiento de datos y permitir cambiar la estrategia fácilmente.
 
-### Identificación de Olores de Código
+### Cálculo del Esfuerzo de Refactorización
 
-#### Acaparadores
+\[
+E(o, s, p) = E(3, 1, 0) = (6 + 5 + 4 + 2) + (30 + 20) + (20 + 25 + 30) = 142
+\]
 
-- **Método Largo (+5)****:**
+La clase `GestorEstudianteLibros` presenta varios malos olores de código, como métodos largos y código duplicado. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 142 puntos.
+
+### Clases Analizadas: `GestorLibros` y Endpoints de Sinatra
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
 - **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+  - La clase `GestorLibros` maneja múltiples responsabilidades, incluyendo la lectura, escritura y gestión de datos de libros. Debería dividirse en clases más pequeñas y especializadas.
 
-#### Abusadores de Orientación a Objetos
+- **Método Largo (+5):**
+  - Los métodos `write_data_to_csv` y `read_data_from_csv` realizan múltiples operaciones que podrían dividirse en métodos más pequeños y especializados.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+##### Dispensables
 
-#### Preventores de Cambio
+- **Código duplicado (+4):**
+  - En los endpoints de `POST`, `PUT` y `DELETE`, hay repetición de código para la lectura y escritura de datos en el archivo CSV.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+##### Abusadores de Orientación a Objetos
 
-#### Dispensables
+- **Métodos *getter* y *setter* (+2):**
+  - La clase `GestorLibros` utiliza métodos *getter* y *setter* para acceder a los datos de los libros, lo cual puede ser una señal de un diseño pobre orientado a objetos.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+#### Violaciones de los Principios SOLID
 
-#### Acopladores
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `GestorLibros` viola este principio al manejar tanto la lógica de acceso a datos como la gestión de los libros. Debería dividirse en diferentes clases con responsabilidades únicas.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Principio de Inversión de Dependencias (DIP) (+20):**
+  - Los endpoints de la API están directamente acoplados a la clase `GestorLibros`, lo que hace difícil cambiar la lógica de almacenamiento sin modificar los endpoints.
 
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
+#### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Factory Method (+20):**
+  - Podría usarse para crear instancias de `GestorLibros` con diferentes fuentes de datos de manera más flexible y clara.
+
+    **Consejo:** Utilizar el patrón Factory Method para la creación de objetos `GestorLibros` con fuentes de datos personalizadas.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Composite (+25):**
+  - Podría implementarse para manejar la estructura de los datos de los libros, permitiendo tratar tanto a los elementos individuales como a las estructuras compuestas de manera uniforme.
+
+    **Consejo:** Implementar el patrón Composite para gestionar la estructura de los datos de los libros de manera más flexible y escalable.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Strategy (+30):**
+  - Podría utilizarse para encapsular las diferentes estrategias de almacenamiento de datos (e.g., almacenamiento en CSV, almacenamiento en bases de datos) permitiendo cambiar fácilmente la estrategia de almacenamiento.
 
-## Clase Analizada: `NombreClase4`
+    **Consejo:** Utilizar el patrón Strategy para encapsular las estrategias de almacenamiento de datos y permitir cambiar la estrategia fácilmente.
 
-### Identificación de Olores de Código
+### Cálculo del Esfuerzo de Refactorización
 
-#### Acaparadores
+\[
+E(o, s, p) = E(3, 1, 0) = (6 + 5 + 4 + 2) + (30 + 20) + (20 + 25 + 30) = 142
+\]
 
-- **Méto****do Largo (+5):**
+La clase `GestorLibros` presenta varios malos olores de código, como métodos largos y código duplicado. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 142 puntos.
+
+### Clases Analizadas: `GestorEstudiante`, `GestorLibros`, `GestorEstudianteLibros` y Endpoints de Sinatra
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
 - **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+  - Las clases `GestorEstudiante`, `GestorLibros` y `GestorEstudianteLibros` manejan múltiples responsabilidades, incluyendo la lectura, escritura y gestión de datos. Deberían dividirse en clases más pequeñas y especializadas.
 
-#### Abusadores de Orientación a Objetos
+- **Método Largo (+5):**
+  - Los métodos `write_data_to_csv` y `read_data_from_csv` realizan múltiples operaciones que podrían dividirse en métodos más pequeños y especializados.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+##### Dispensables
 
-#### Preventores de Cambio
+- **Código duplicado (+4):**
+  - En los endpoints de `POST`, `PUT` y `DELETE`, hay repetición de código para la lectura y escritura de datos en el archivo CSV.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+##### Abusadores de Orientación a Objetos
 
-#### Dispensables
+- **Métodos *getter* y *setter* (+2):**
+  - Las clases `GestorEstudiante`, `GestorLibros` y `GestorEstudianteLibros` utilizan métodos *getter* y *setter* para acceder a los datos, lo cual puede ser una señal de un diseño pobre orientado a objetos.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+#### Violaciones de los Principios SOLID
 
-#### Acopladores
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - Las clases `GestorEstudiante`, `GestorLibros` y `GestorEstudianteLibros` violan este principio al manejar tanto la lógica de acceso a datos como la gestión de los mismos. Deberían dividirse en diferentes clases con responsabilidades únicas.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Principio de Inversión de Dependencias (DIP) (+20):**
+  - Los endpoints de la API están directamente acoplados a las clases de gestores, lo que hace difícil cambiar la lógica de almacenamiento sin modificar los endpoints.
 
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
+#### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Factory Method (+20):**
+  - Podría usarse para crear instancias de `GestorEstudiante`, `GestorLibros` y `GestorEstudianteLibros` con diferentes fuentes de datos de manera más flexible y clara.
+
+    **Consejo:** Utilizar el patrón Factory Method para la creación de objetos gestores con fuentes de datos personalizadas.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Composite (+25):**
+  - Podría implementarse para manejar la estructura de los datos, permitiendo tratar tanto a los elementos individuales como a las estructuras compuestas de manera uniforme.
+
+    **Consejo:** Implementar el patrón Composite para gestionar la estructura de los datos de manera más flexible y escalable.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Strategy (+30):**
+  - Podría utilizarse para encapsular las diferentes estrategias de almacenamiento de datos (e.g., almacenamiento en CSV, almacenamiento en bases de datos) permitiendo cambiar fácilmente la estrategia de almacenamiento.
 
+    **Consejo:** Utilizar el patrón Strategy para encapsular las estrategias de almacenamiento de datos y permitir cambiar la estrategia fácilmente.
 
+### Cálculo del Esfuerzo de Refactorización
+
+\[
+E(o, s, p) = E(3, 1, 0) = (6 + 5 + 4 + 2) + (30 + 20) + (20 + 25 + 30) = 142
+\]
+
+Las clases `GestorEstudiante`, `GestorLibros` y `GestorEstudianteLibros` presentan varios malos olores de código, como métodos largos y código duplicado. También violan el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar estas clases es de 142 puntos.
 
 Este repositorio fue obtenido de: https://github.com/damm2001/LP-Project---Backend

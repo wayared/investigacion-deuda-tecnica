@@ -1,343 +1,245 @@
+# Informe de Análisis de Código JavaScript (Node.js y Express)
 
-# Informe de Análisis de Deuda Técnica
+## Archivo Analizado: `ejercicios.js`
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+### Descripción General
 
-## Clase Analizada: `NombreClase1`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase2`
+El archivo `ejercicios.js` maneja las rutas para la API RESTful relacionadas con la entidad `Ejercicios`. Permite realizar operaciones CRUD (Crear, Leer, Actualizar) utilizando Sequelize como ORM para interactuar con la base de datos.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Funciones Grandes (+1):**
+   - Las funciones en cada ruta contienen múltiples responsabilidades, lo que dificulta la lectura y mantenimiento del código.
 
-#### Abusadores de Orientación a Objetos
+2. **Duplicación de Código (+1):**
+   - La lógica para excluir atributos específicos (`attributes: { exclude: ["updatedAt","createdAt","id"]}`) se repite en múltiples lugares.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Validaciones Mínimas (+1):**
+   - No se realizan validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos.
 
-#### Preventores de Cambio
+4. **Manejo de Errores Insuficiente (+1):**
+   - El manejo de errores es básico y no proporciona retroalimentación detallada en caso de fallos.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+#### Principios SOLID Violados
 
-#### Dispensables
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - Las rutas tienen múltiples responsabilidades, incluyendo la validación de datos, la interacción con la base de datos y el manejo de respuestas HTTP, lo que debería estar separado en diferentes capas o servicios.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - Las rutas dependen directamente de la implementación de Sequelize y el modelo `Ejercicios`, lo que dificulta el cambio y la prueba de estas dependencias.
 
-#### Acopladores
+#### Patrones de Diseño no Utilizados
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+1. **Repository Pattern (+10):**
+   - Implementar un patrón Repository para manejar la interacción con la base de datos mejoraría la separación de preocupaciones y la mantenibilidad del código.
 
-### Violaciones de los Principios SOLID
+### Cálculo del Esfuerzo de Refactorización
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+\[
+E(o, s, p) = E(4, 2, 1) = (1 + 1 + 1 + 1) + (10 + 10) + (10) = 34
+\]
 
-### Patrones de diseño no utilizados
+### Comentarios Adicionales
 
-#### Creacionales
+- **Manejo de Errores:**
+  - Mejorar el manejo de errores para proporcionar retroalimentación más útil y detallada en caso de fallos en las operaciones con la base de datos.
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Validación de Datos:**
+  - Implementar validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos para asegurar la integridad y consistencia de los datos.
 
-#### Estructurales
+### Recomendaciones de Refactorización
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+1. **Separación de Responsabilidades:**
+   - Separar la lógica de validación de datos, interacción con la base de datos y manejo de respuestas HTTP en diferentes capas o servicios.
 
-#### De comportamiento
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Repository para manejar las operaciones CRUD sobre los `Ejercicios`, lo que permitirá cambiar fácilmente el backend de almacenamiento si es necesario en el futuro.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+3. **Consolidación de Código Repetitivo:**
+   - Consolidar la lógica repetitiva, como la exclusión de atributos específicos, en funciones auxiliares para mejorar la mantenibilidad y reducir el código duplicado.
 
-## Clase Analizada: `NombreClase3`
+## Archivo Analizado: `ejerciciosEntrenamiento.js`
+
+### Descripción General
+
+El archivo `ejerciciosEntrenamiento.js` maneja las rutas para la API RESTful relacionadas con la entidad `EjerciciosEntrenamiento`. Permite realizar operaciones CRUD (Crear, Leer, Actualizar) utilizando Sequelize como ORM para interactuar con la base de datos.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Funciones Grandes (+1):**
+   - Las funciones en cada ruta contienen múltiples responsabilidades, lo que dificulta la lectura y mantenimiento del código.
 
-#### Abusadores de Orientación a Objetos
+2. **Duplicación de Código (+1):**
+   - La lógica para excluir atributos específicos (`attributes: { exclude: ["updatedAt","createdAt","id"]}`) se repite en múltiples lugares.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Validaciones Mínimas (+1):**
+   - No se realizan validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos.
 
-#### Preventores de Cambio
+4. **Manejo de Errores Insuficiente (+1):**
+   - El manejo de errores es básico y no proporciona retroalimentación detallada en caso de fallos.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+#### Principios SOLID Violados
 
-#### Dispensables
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - Las rutas tienen múltiples responsabilidades, incluyendo la validación de datos, la interacción con la base de datos y el manejo de respuestas HTTP, lo que debería estar separado en diferentes capas o servicios.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - Las rutas dependen directamente de la implementación de Sequelize y el modelo `EjerciciosEntrenamiento`, lo que dificulta el cambio y la prueba de estas dependencias.
 
-#### Acopladores
+#### Patrones de Diseño no Utilizados
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+1. **Repository Pattern (+10):**
+   - Implementar un patrón Repository para manejar la interacción con la base de datos mejoraría la separación de preocupaciones y la mantenibilidad del código.
 
-### Violaciones de los Principios SOLID
+### Cálculo del Esfuerzo de Refactorización
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+\[
+E(o, s, p) = E(4, 2, 1) = (1 + 1 + 1 + 1) + (10 + 10) + (10) = 34
+\]
 
-### Patrones de diseño no utilizados
 
-#### Creacionales
+### Comentarios Adicionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Manejo de Errores:**
+  - Mejorar el manejo de errores para proporcionar retroalimentación más útil y detallada en caso de fallos en las operaciones con la base de datos.
 
-#### Estructurales
+- **Validación de Datos:**
+  - Implementar validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos para asegurar la integridad y consistencia de los datos.
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+### Recomendaciones de Refactorización
 
-#### De comportamiento
+1. **Separación de Responsabilidades:**
+   - Separar la lógica de validación de datos, interacción con la base de datos y manejo de respuestas HTTP en diferentes capas o servicios.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Repository para manejar las operaciones CRUD sobre los `EjerciciosEntrenamiento`, lo que permitirá cambiar fácilmente el backend de almacenamiento si es necesario en el futuro.
 
-## Clase Analizada: `NombreClase4`
+3. **Consolidación de Código Repetitivo:**
+   - Consolidar la lógica repetitiva, como la exclusión de atributos específicos, en funciones auxiliares para mejorar la mantenibilidad y reducir el código duplicado.
+
+## Archivo Analizado: `entrenamientos.js`
+
+### Descripción General
+
+El archivo `entrenamientos.js` maneja las rutas para la API RESTful relacionadas con la entidad `Entrenamientos`. Permite realizar operaciones CRUD (Crear, Leer, Actualizar) utilizando Sequelize como ORM para interactuar con la base de datos.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Funciones Grandes (+1):**
+   - Las funciones en cada ruta contienen múltiples responsabilidades, lo que dificulta la lectura y mantenimiento del código.
 
-#### Abusadores de Orientación a Objetos
+2. **Duplicación de Código (+1):**
+   - La lógica para excluir atributos específicos (`attributes: { exclude: ["updatedAt","createdAt","id"]}`) se repite en múltiples lugares.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Validaciones Mínimas (+1):**
+   - No se realizan validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos.
 
-#### Preventores de Cambio
+4. **Manejo de Errores Insuficiente (+1):**
+   - El manejo de errores es básico y no proporciona retroalimentación detallada en caso de fallos.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+#### Principios SOLID Violados
 
-#### Dispensables
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - Las rutas tienen múltiples responsabilidades, incluyendo la validación de datos, la interacción con la base de datos y el manejo de respuestas HTTP, lo que debería estar separado en diferentes capas o servicios.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - Las rutas dependen directamente de la implementación de Sequelize y el modelo `Entrenamientos`, lo que dificulta el cambio y la prueba de estas dependencias.
 
-#### Acopladores
+#### Patrones de Diseño no Utilizados
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+1. **Repository Pattern (+10):**
+   - Implementar un patrón Repository para manejar la interacción con la base de datos mejoraría la separación de preocupaciones y la mantenibilidad del código.
 
-### Violaciones de los Principios SOLID
+### Cálculo del Esfuerzo de Refactorización
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+\[
+E(o, s, p) = E(4, 2, 1) = (1 + 1 + 1 + 1) + (10 + 10) + (10) = 34
+\]
 
-### Patrones de diseño no utilizados
+### Comentarios Adicionales
 
-#### Creacionales
+- **Manejo de Errores:**
+  - Mejorar el manejo de errores para proporcionar retroalimentación más útil y detallada en caso de fallos en las operaciones con la base de datos.
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Validación de Datos:**
+  - Implementar validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos para asegurar la integridad y consistencia de los datos.
 
-#### Estructurales
+### Recomendaciones de Refactorización
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+1. **Separación de Responsabilidades:**
+   - Separar la lógica de validación de datos, interacción con la base de datos y manejo de respuestas HTTP en diferentes capas o servicios.
 
-#### De comportamiento
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Repository para manejar las operaciones CRUD sobre los `Entrenamientos`, lo que permitirá cambiar fácilmente el backend de almacenamiento si es necesario en el futuro.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+3. **Consolidación de Código Repetitivo:**
+   - Consolidar la lógica repetitiva, como la exclusión de atributos específicos, en funciones auxiliares para mejorar la mantenibilidad y reducir el código duplicado.
+
+## Archivo Analizado: `informes.js`
+
+### Descripción General
+
+El archivo `informes.js` maneja las rutas para la API RESTful relacionadas con la entidad `Informes`. Permite realizar operaciones CRUD (Crear, Leer, Actualizar) utilizando Sequelize como ORM para interactuar con la base de datos.
+
+### Identificación de Olores de Código
+
+#### Olores de Código
+
+1. **Funciones Grandes (+1):**
+   - Las funciones en cada ruta contienen múltiples responsabilidades, lo que dificulta la lectura y mantenimiento del código.
+
+2. **Duplicación de Código (+1):**
+   - La lógica para excluir atributos específicos (`attributes: { exclude: ["updatedAt","createdAt","id"]}`) se repite en múltiples lugares.
+
+3. **Validaciones Mínimas (+1):**
+   - No se realizan validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos.
+
+4. **Manejo de Errores Insuficiente (+1):**
+   - El manejo de errores es básico y no proporciona retroalimentación detallada en caso de fallos.
+
+#### Principios SOLID Violados
+
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - Las rutas tienen múltiples responsabilidades, incluyendo la validación de datos, la interacción con la base de datos y el manejo de respuestas HTTP, lo que debería estar separado en diferentes capas o servicios.
+
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - Las rutas dependen directamente de la implementación de Sequelize y el modelo `Informes`, lo que dificulta el cambio y la prueba de estas dependencias.
+
+#### Patrones de Diseño no Utilizados
+
+1. **Repository Pattern (+10):**
+   - Implementar un patrón Repository para manejar la interacción con la base de datos mejoraría la separación de preocupaciones y la mantenibilidad del código.
+
+### Cálculo del Esfuerzo de Refactorización
+
+\[
+E(o, s, p) = E(4, 2, 1) = (1 + 1 + 1 + 1) + (10 + 10) + (10) = 34
+\]
+
+### Comentarios Adicionales
+
+- **Manejo de Errores:**
+  - Mejorar el manejo de errores para proporcionar retroalimentación más útil y detallada en caso de fallos en las operaciones con la base de datos.
+
+- **Validación de Datos:**
+  - Implementar validaciones exhaustivas sobre los datos de entrada antes de realizar operaciones en la base de datos para asegurar la integridad y consistencia de los datos.
+
+### Recomendaciones de Refactorización
+
+1. **Separación de Responsabilidades:**
+   - Separar la lógica de validación de datos, interacción con la base de datos y manejo de respuestas HTTP en diferentes capas o servicios.
+
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Repository para manejar las operaciones CRUD sobre los `Informes`, lo que permitirá cambiar fácilmente el backend de almacenamiento si es necesario en el futuro.
+
+3. **Consolidación de Código Repetitivo:**
+   - Consolidar la lógica repetitiva, como la exclusión de atributos específicos, en funciones auxiliares para mejorar la mantenibilidad y reducir el código duplicado.
 
 
 

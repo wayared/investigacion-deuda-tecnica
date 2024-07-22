@@ -1,343 +1,206 @@
-
 # Informe de Análisis de Deuda Técnica
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+## Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-## Clase Analizada: `NombreClase1`
+### Clase Analizada: `PrimaryyController`
 
-### Identificación de Olores de Código
+#### Identificación de Olores de Código
 
-#### Acaparadores
+##### Acaparadores
 
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- **Método Largo (+5):**
+  - `initialize`: Este método realiza múltiples tareas, como la configuración inicial de los elementos de la interfaz y la carga del árbol binario, lo que lo hace extenso y difícil de mantener.
+  - `putQuestionNodes`: Este método es largo y complejo, ya que se encarga de leer datos desde un archivo y construir un árbol binario de manera iterativa.
+
+##### Dispensables
+
+- **Código duplicado (+7):**
+  - Hay varias instancias donde se repite la lógica para establecer eventos y manejar nodos del árbol, como en los métodos `nOpciones` y `Display`.
+
+- **Código muerto (+3):**
+  - Existen comentarios de código y fragmentos de código comentados que no se utilizan y deberían ser eliminados para mejorar la legibilidad.
+
+##### Preventores de Cambio
+
+- **Cambio divergente (+6):**
+  - La clase `PrimaryyController` tiene múltiples responsabilidades, como la gestión de eventos de la interfaz de usuario, la lógica de negocio del juego de preguntas y respuestas, y la manipulación del árbol binario. Esto implica que cualquier cambio en una de estas áreas podría afectar a las otras, haciendo el código difícil de mantener.
 
 #### Abusadores de Orientación a Objetos
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+- **Sentencias Switch (+5):**
+  - Aunque no se usan directamente sentencias `switch`, la clase utiliza múltiples condicionales (`if-else`) en métodos como `nOpciones` y `Display` para manejar diferentes respuestas y rutas en el árbol. Esto podría ser mejorado usando el patrón de diseño Estrategia.
 
 #### Acopladores
 
-- **Envidia de características (+5):**
 - **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+  - La clase `PrimaryyController` accede frecuentemente a métodos y variables privadas de otras clases, como `BinaryTree` y `DataManager`, lo que aumenta el acoplamiento y dificulta el mantenimiento.
 
 ### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `PrimaryyController` viola este principio al tener múltiples responsabilidades. Maneja la interfaz de usuario, la lógica de juego, y la manipulación de datos, lo que debería estar separado en diferentes clases.
+
+- **Principio de Inversión de Dependencias (DIP) (+45):**
+  - La clase `PrimaryyController` depende directamente de implementaciones concretas como `BinaryTree` y `DataManager` en lugar de abstracciones. Debería depender de interfaces o clases abstractas para reducir el acoplamiento y aumentar la flexibilidad.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Método de Fábrica (+20):**
+  - Consejo: Usa el Método de Fábrica para encapsular la creación de nodos del árbol binario. Esto puede reducir la complejidad y mejorar la flexibilidad del código.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Adaptador (+25):**
+  - Consejo: Implementa el patrón Adaptador para permitir que clases con interfaces incompatibles trabajen juntas. Esto sería útil para adaptar diferentes estructuras de datos a la lógica de la interfaz de usuario.
+
+- **Fachada (+20):**
+  - Consejo: Implementa una Fachada para proporcionar una interfaz simplificada a un conjunto de interfaces en el subsistema del árbol binario y la gestión de datos.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Cadena de Responsabilidad (+30):**
+  - Consejo: Utiliza Cadena de Responsabilidad para manejar las respuestas del usuario en el árbol binario, reduciendo el acoplamiento entre el emisor y el receptor.
 
-## Clase Analizada: `NombreClase2`
+- **Comando (+20):**
+  - Consejo: Aplica el patrón Comando para encapsular solicitudes de usuario como objetos, lo que permite parametrizar clientes con colas y solicitudes.
 
-### Identificación de Olores de Código
+- **Estrategia (+20):**
+  - Consejo: Usa Estrategia para definir una familia de algoritmos, encapsular cada uno, y hacerlos intercambiables. Esto sería útil para manejar diferentes tipos de respuestas y rutas en el árbol binario.
 
-#### Acaparadores
+### Cálculo del Esfuerzo de Refactorización
 
-- **Método Largo (+5)****:**
+\[
+E(o, s, p) = E(4, 2, 0) = (5 + 7 + 3 + 6 + 6) + (30 + 45) + 0 = 102
+\]
+
+La clase `PrimaryyController` presenta varios malos olores de código, como métodos largos, código duplicado y acoplamiento inapropiado. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 102 puntos.
+
+### Clase Analizada: `DataManager`
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
 - **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+  - La clase `DataManager` tiene múltiples responsabilidades, incluyendo la carga de atributos, la carga de respuestas de animales, y la gestión de datos. Esta clase podría dividirse en varias clases más pequeñas para mejorar su mantenibilidad.
 
-#### Abusadores de Orientación a Objetos
+- **Método Largo (+5):**
+  - `loadAnimalsResponses`: Este método realiza múltiples tareas, como leer líneas de un archivo y dividirlas en atributos y valores, lo que lo hace largo y complejo.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+##### Obsesión Primitiva (+3):**
+  - Uso de tipos primitivos (`String`, `List<String>`) para representar datos complejos. Esto se observa en la carga de atributos y valores de animales, donde se podrían usar clases más específicas para encapsular estos datos.
+
+##### Dispensables
+
+- **Comentarios (+2):**
+  - Existen muchos comentarios en el código que podrían evitarse con un código más claro y autoexplicativo.
+
+##### Acopladores
+
+- **Envidia de características (+5):**
+  - La clase `DataManager` utiliza intensivamente métodos de la clase `Scanner`, lo que podría indicar que parte de esta lógica debería estar en una clase separada para manejar la lectura de archivos.
 
 #### Preventores de Cambio
 
 - **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+  - La clase `DataManager` tiene múltiples razones para cambiar, ya sea por cambios en el formato de los datos de entrada o por cambios en la lógica de carga de datos.
 
 ### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `DataManager` viola este principio al tener múltiples responsabilidades. Maneja la carga de datos desde archivos, la organización de estos datos en estructuras, y la gestión de atributos y valores. Esto debería estar separado en diferentes clases.
+
+- **Principio de Inversión de Dependencias (DIP) (+45):**
+  - La clase `DataManager` depende directamente de implementaciones concretas como `Scanner` y `File`, en lugar de depender de abstracciones. Esto limita la flexibilidad y dificulta el mantenimiento y las pruebas.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Constructor (+25):**
+  - Consejo: Usa un Constructor para encapsular la creación de instancias de `DataManager`, lo que puede ayudar a establecer una configuración inicial más clara y a reducir la complejidad del constructor actual.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Adaptador (+25):**
+  - Consejo: Implementa el patrón Adaptador para permitir que diferentes tipos de fuentes de datos (por ejemplo, archivos, bases de datos) trabajen con la clase `DataManager`.
+
+- **Fachada (+20):**
+  - Consejo: Implementa una Fachada para proporcionar una interfaz simplificada para la carga y gestión de datos, encapsulando la complejidad interna.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Estrategia (+20):**
+  - Consejo: Usa Estrategia para definir una familia de algoritmos de carga de datos, encapsular cada uno, y hacerlos intercambiables. Esto sería útil para manejar diferentes formatos de datos.
 
-## Clase Analizada: `NombreClase3`
+### Cálculo del Esfuerzo de Refactorización
 
-### Identificación de Olores de Código
+\[
+E(o, s, p) = E(4, 2, 0) = (6 + 5 + 3 + 2 + 5 + 6) + (30 + 45) + 0 = 102
+\]
 
-#### Acaparadores
+La clase `DataManager` presenta varios malos olores de código, como métodos largos, obsesión primitiva, y acoplamiento inapropiado. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 102 puntos.
 
-- **Método Largo (+5)****:**
+### Clase Analizada: `BinaryTree`
+
+#### Identificación de Olores de Código
+
+##### Acaparadores
+
 - **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+  - La clase `BinaryTree` maneja múltiples responsabilidades, incluyendo la gestión de nodos de árbol, el recorrido del árbol y la manipulación de niveles. Debería dividirse en clases más pequeñas y especializadas.
 
-#### Abusadores de Orientación a Objetos
+- **Método Largo (+5):**
+  - `preOrderTraversalRecursive`: Este método realiza múltiples operaciones de recorrido, haciéndolo largo y difícil de mantener.
+  - `breadthTraversal`: Este método también es largo y maneja varias operaciones, lo que complica su comprensión.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
+##### Dispensables
 
 - **Comentarios (+2):**
+  - Existen comentarios que podrían ser eliminados si el código fuera más claro y autoexplicativo.
+
 - **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+  - Hay métodos redundantes como `showLeaf` y `showLeaft` que podrían ser refactorizados en un solo método para evitar duplicación.
 
-#### Acopladores
+##### Abusadores de Orientación a Objetos
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+- **Métodos *getter* y *setter* (+4):**
+  - La clase tiene varios métodos *getter* y *setter* que no agregan lógica adicional, lo cual puede ser una señal de un diseño pobre orientado a objetos.
 
-### Violaciones de los Principios SOLID
+#### Violaciones de los Principios SOLID
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+- **Principio de Responsabilidad Única (SRP) (+30):**
+  - La clase `BinaryTree` viola este principio al manejar tanto la estructura del árbol como las operaciones de recorrido y manipulación. Debería dividirse en diferentes clases con responsabilidades únicas.
+
+- **Principio de Inversión de Dependencias (DIP) (+45):**
+  - La clase depende directamente de implementaciones concretas, como `LinkedList`, `Queue` y `Stack`, en lugar de depender de abstracciones. Esto limita la flexibilidad y la posibilidad de reutilización del código.
 
 ### Patrones de diseño no utilizados
 
 #### Creacionales
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Constructor (+25):**
+  - Consejo: Usa un Constructor que inicialice todos los elementos necesarios del árbol binario, lo que puede simplificar la creación de instancias y asegurar que el objeto se encuentre en un estado consistente.
 
 #### Estructurales
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+- **Composite (+30):**
+  - Consejo: Implementa el patrón Composite para manejar la estructura del árbol binario. Esto permitiría tratar tanto a los nodos individuales como a las estructuras compuestas de manera uniforme.
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+- **Iterator (+15):**
+  - Consejo: Usa el patrón Iterator para proporcionar una forma de acceder secuencialmente a los elementos del árbol sin exponer su representación subyacente.
 
-## Clase Analizada: `NombreClase4`
+### Cálculo del Esfuerzo de Refactorización
 
-### Identificación de Olores de Código
+\[
+E(o, s, p) = E(5, 2, 0) = (6 + 5 + 2 + 7 + 4) + (30 + 45) + 0 = 99
+\]
 
-#### Acaparadores
-
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+La clase `BinaryTree` presenta varios malos olores de código, como métodos largos, código duplicado y abuso de getters y setters. También viola el Principio de Responsabilidad Única (SRP) y el Principio de Inversión de Dependencias (DIP). El esfuerzo estimado para refactorizar esta clase es de 99 puntos.
 
 
 

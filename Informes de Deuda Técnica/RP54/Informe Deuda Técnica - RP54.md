@@ -3,7 +3,7 @@
 
 # Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
 
-## Clase Analizada: `NombreClase1`
+## Clase Analizada: `DatosComponent`
 
 ### Identificación de Olores de Código
 
@@ -13,7 +13,7 @@
 - **Clase Grande (+6):**
 - **Obsesión Primitiva (+3):**
 - **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+- **Grupos de Datos (+3):** La clase maneja datos de tipo Spotify y filtros.
 
 #### Abusadores de Orientación a Objetos
 
@@ -24,7 +24,7 @@
 
 #### Preventores de Cambio
 
-- **Cambio divergente (+6):**
+- **Cambio divergente (+6):** La clase podría necesitar cambios si los datos o el formato de respuesta cambian.
 - **Jerarquías de herencia paralela (+7):**
 - **Cirugía de escopeta (+8):**
 
@@ -42,7 +42,7 @@
 - **Envidia de características (+5):**
 - **Intimidad inapropiada (+6):**
 - **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
+- **Cadenas de mensajes (+7):** No hay manejo explícito de errores o cadenas de mensajes.
 - **Hombre medio (+6):**
 
 ### Violaciones de los Principios SOLID
@@ -69,13 +69,13 @@
 * **Puente (+35)**
 * **Compuesto (+30)**
 * **Decorador (+25)**
-* **Fachada (+20)**
+* **Fachada (+20)** La clase no actúa como una fachada en el contexto actual.
 * **Peso Ligero (+40)**
 * **Proxy (+30)**
 
 #### De comportamiento
 
-* **Cadena de Responsabilidad (+30)**
+* **Cadena de Responsabilidad (+30)** No se utiliza una cadena de responsabilidad.
 * **Comando (+20)**
 * **Intérprete (+40)**
 * **Iterador (+15)**
@@ -87,7 +87,7 @@
 * **Método Plantilla (+25)**
 * **Visitante (+35)**
 
-## Clase Analizada: `NombreClase2`
+## Clase Analizada: `IndexComponent`
 
 ### Identificación de Olores de Código
 

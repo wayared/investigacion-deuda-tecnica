@@ -1,344 +1,259 @@
+# Informe de Análisis de Código Angular y TypeScript
 
-# Informe de Análisis de Deuda Técnica
+## Clase Analizada: `CrearRutaComponent`
 
-# Malos olores de código, Patrones de Diseño no usados y Principios SOLID violados
+### Descripción General
 
-## Clase Analizada: `NombreClase1`
-
-### Identificación de Olores de Código
-
-#### Acaparadores
-
-- **Método Largo** **(+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
-
-#### Abusadores de Orientación a Objetos
-
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
-
-#### Preventores de Cambio
-
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
-
-#### Dispensables
-
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
-
-#### Acopladores
-
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
-
-### Violaciones de los Principios SOLID
-
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
-
-### Patrones de diseño no utilizados
-
-#### Creacionales
-
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
-
-#### Estructurales
-
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
-
-#### De comportamiento
-
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
-
-## Clase Analizada: `NombreClase2`
+La clase `CrearRutaComponent` permite a los usuarios crear una ruta especificando una dirección de inicio y una dirección de fin. El componente utiliza el servicio `HttpClient` para interactuar con una API y obtener las coordenadas geográficas correspondientes a las direcciones proporcionadas. Luego, estos datos se envían al servicio `MapasService` para agregar la nueva ruta.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Función Grande (+1):**
+   - Las funciones `obtenerCoordenadasInicio` y `obtenerCoordenadasFin` contienen demasiada lógica, lo que dificulta su mantenimiento y comprensión.
 
-#### Abusadores de Orientación a Objetos
+2. **Código Duplicado (+1):**
+   - Las funciones `obtenerCoordenadasInicio` y `obtenerCoordenadasFin` tienen código repetido. Ambas realizan solicitudes HTTP similares y manejan los mismos tipos de errores.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Uso Excesivo de Literales (+1):**
+   - La URL de la API está codificada directamente en las funciones, lo que dificulta su actualización en caso de cambios.
 
-#### Preventores de Cambio
+4. **Múltiples Responsabilidades (+1):**
+   - El componente maneja tanto la lógica de la vista como la lógica de negocio, lo que va en contra del principio de responsabilidad única.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+#### Principios SOLID Violados
 
-#### Dispensables
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - El componente `CrearRutaComponent` tiene múltiples responsabilidades: manejar la lógica de la interfaz de usuario, interactuar con el servicio HTTP, y manejar los errores.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La clase depende directamente de la implementación de `HttpClient` en lugar de una abstracción.
 
-#### Acopladores
+#### Patrones de Diseño no Utilizados
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+1. **Facade (+10):**
+   - Una clase fachada podría manejar la lógica de obtención de coordenadas, reduciendo la complejidad del componente.
 
-### Violaciones de los Principios SOLID
+### Cálculo del Esfuerzo de Refactorización
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+\[
+E(o, s, p) = E(4, 2, 1) = (1 + 1 + 1 + 1) + (10 + 10) + (10) = 34
+\]
 
-### Patrones de diseño no utilizados
+### Comentarios Adicionales
 
-#### Creacionales
+- **Validación de Datos:**
+  - Actualmente, no hay validación para asegurarse de que las direcciones proporcionadas sean válidas antes de realizar las solicitudes HTTP.
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Gestión de Errores:**
+  - La gestión de errores se realiza de manera duplicada en las funciones `obtenerCoordenadasInicio` y `obtenerCoordenadasFin`.
 
-#### Estructurales
+- **Configuración de HTTP:**
+  - La configuración de la solicitud HTTP podría mejorarse utilizando una clase de servicio dedicada.
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+### Recomendaciones de Refactorización
 
-#### De comportamiento
+1. **División de Responsabilidades:**
+   - Separar la lógica de obtención de coordenadas en un servicio dedicado. Esto permitirá que el componente `CrearRutaComponent` se concentre en la lógica de la interfaz de usuario.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Facade para encapsular la lógica de interacción con la API.
 
-## Clase Analizada: `NombreClase3`
+3. **Encapsulamiento de Literales:**
+   - Utilizar constantes o variables de configuración para la URL de la API.
+
+4. **Mejora de la Gestión de Errores:**
+   - Crear una función común para manejar errores y reutilizarla en las solicitudes HTTP.
+
+## Clase Analizada: `RutasComponent`
+
+### Descripción General
+
+La clase `RutasComponent` se encarga de mostrar rutas en un mapa utilizando la librería Leaflet. El componente obtiene los datos de las rutas desde un servicio y los renderiza en el mapa, permitiendo también filtrar las rutas mostradas.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Método Largo (+5)****:**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Función Grande (+1):**
+   - La función `crearMapa` contiene demasiada lógica, incluyendo la inicialización del mapa, la configuración de capas, la creación de marcadores y líneas, y el manejo de eventos.
 
-#### Abusadores de Orientación a Objetos
+2. **Código Duplicado (+1):**
+   - La creación de marcadores para `restaurantes` y `restaurantes1` es similar y podría consolidarse en una función reutilizable.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Uso Excesivo de Literales (+1):**
+   - Las URLs de los iconos de los marcadores están codificadas directamente en el código.
 
-#### Preventores de Cambio
+4. **Múltiples Responsabilidades (+1):**
+   - El componente maneja tanto la lógica de la interfaz de usuario como la lógica de negocio, lo que va en contra del principio de responsabilidad única.
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+#### Principios SOLID Violados
 
-#### Dispensables
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - El componente `RutasComponent` tiene múltiples responsabilidades: manejar la lógica de la interfaz de usuario, interactuar con el servicio de mapas, y manejar la lógica de renderizado del mapa.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La clase depende directamente de la implementación de `HttpClient` en lugar de una abstracción.
 
-#### Acopladores
+#### Patrones de Diseño no Utilizados
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+1. **Facade (+10):**
+   - Una clase fachada podría manejar la lógica de creación de marcadores y líneas, reduciendo la complejidad del componente.
 
-### Violaciones de los Principios SOLID
+### Cálculo del Esfuerzo de Refactorización
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
+\[
+E(o, s, p) = E(4, 2, 1) = (1 + 1 + 1 + 1) + (10 + 10) + (10) = 34
+\]
 
-### Patrones de diseño no utilizados
+### Comentarios Adicionales
 
-#### Creacionales
+- **Validación de Datos:**
+  - Actualmente, no hay validación para asegurarse de que las coordenadas obtenidas sean válidas antes de agregarlas al mapa.
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Gestión de Errores:**
+  - La gestión de errores se realiza de manera mínima y podría mejorarse para proporcionar retroalimentación al usuario en caso de fallos.
 
-#### Estructurales
+- **Configuración de HTTP:**
+  - La configuración de la solicitud HTTP podría mejorarse utilizando una clase de servicio dedicada para manejar las peticiones.
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+### Recomendaciones de Refactorización
 
-#### De comportamiento
+1. **División de Responsabilidades:**
+   - Separar la lógica de creación de marcadores y líneas en un servicio dedicado. Esto permitirá que el componente `RutasComponent` se concentre en la lógica de la interfaz de usuario.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Facade para encapsular la lógica de creación y manipulación de marcadores y líneas en el mapa.
 
-## Clase Analizada: `NombreClase4`
+3. **Encapsulamiento de Literales:**
+   - Utilizar constantes o variables de configuración para las URLs de los iconos de los marcadores.
+
+4. **Mejora de la Gestión de Errores:**
+   - Crear una función común para manejar errores y reutilizarla en las solicitudes HTTP.
+
+## Clase Analizada: `RegisterComponent`
+
+### Descripción General
+
+La clase `RegisterComponent` es responsable de manejar la lógica del formulario de registro de usuarios. Permite a los usuarios crear una cuenta proporcionando un nombre de usuario, una contraseña y un rol. Utiliza servicios para interactuar con una API backend y redirigir al usuario a una página específica una vez registrado.
 
 ### Identificación de Olores de Código
 
-#### Acaparadores
+#### Olores de Código
 
-- **Méto****do Largo (+5):**
-- **Clase Grande (+6):**
-- **Obsesión Primitiva (+3):**
-- **Lista de Parámetros Largos (+4):**
-- **Grupos de Datos (+3):**
+1. **Función Grande (+1):**
+   - La función `onSubmit` contiene múltiples responsabilidades, incluyendo la validación de usuarios y la lógica de envío del formulario.
 
-#### Abusadores de Orientación a Objetos
+2. **Acoplamiento Fuerte (+1):**
+   - La lógica de enrutamiento y manejo de mensajes de éxito está acoplada directamente en la función `onSubmit`, lo que dificulta la reutilización y el mantenimiento.
 
-- **Clases Alternativas con Diferentes Interfaces (+7):**
-- **Legado Rechazado (+6):**
-- **Sentencias *Switch* (+5):**
-- **Campos Temporales (+4):**
+3. **Manejo de Errores Mínimo (+1):**
+   - El manejo de errores en la solicitud HTTP es básico y no proporciona retroalimentación adecuada al usuario en caso de fallos.
 
-#### Preventores de Cambio
+#### Principios SOLID Violados
 
-- **Cambio divergente (+6):**
-- **Jerarquías de herencia paralela (+7):**
-- **Cirugía de escopeta (+8):**
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - La función `onSubmit` realiza múltiples tareas: validación de usuarios, envío de datos, y manejo de redirección y mensajes de éxito.
 
-#### Dispensables
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La clase depende directamente de la implementación de `Router`, `AuthenticationService`, y `DataService` en lugar de interfaces o abstracciones.
 
-- **Comentarios (+2):**
-- **Código duplicado (+7):**
-- **Clase de datos (+5):**
-- **Código muerto (+3):**
-- **Clase perezosa (+4):**
-- **Generalidad especulativa (+5):**
+#### Patrones de Diseño no Utilizados
 
-#### Acopladores
+1. **Facade (+10):**
+   - Un patrón Facade podría encapsular la lógica de interacción con los servicios y el enrutador, simplificando el componente y mejorando la separación de responsabilidades.
 
-- **Envidia de características (+5):**
-- **Intimidad inapropiada (+6):**
-- **Clase de biblioteca incompleta (+4):**
-- **Cadenas de mensajes (+7):**
-- **Hombre medio (+6):**
+### Cálculo del Esfuerzo de Refactorización
 
-### Violaciones de los Principios SOLID
+\[
+E(o, s, p) = E(3, 2, 1) = (1 + 1 + 1) + (10 + 10) + (10) = 33
+\]
 
-- **Principio de Responsabilidad Única (SRP) (+30)**
-- **Principio Abierto/Cerrado (OCP) (+40)**
-- **Principio de Sustitución de Liskov (LSP) (+35)**
-- **Principio de Segregación de Interfaces (ISP) (+25)**
-- **Principio de Inversión de Dependencias (DIP) (+45)**
 
-### Patrones de diseño no utilizados
+### Comentarios Adicionales
 
-#### Creacionales
+- **Validación de Datos:**
+  - La validación de la existencia del usuario se realiza en el cliente, lo que puede ser ineficiente y propenso a condiciones de carrera si múltiples usuarios se registran simultáneamente.
 
-- **Fábrica Abstracta (+20)**
-- **Constructor (+25)**
-- **Método de Fábrica (+20)**
-- **Prototipo (+30)**
-- **Singleton (+15)**
+- **Gestión de Estado:**
+  - La gestión del estado del formulario podría beneficiarse del uso de un formulario reactivo (`ReactiveFormsModule`) para mejorar la validación y manejo del estado del formulario.
 
-#### Estructurales
+### Recomendaciones de Refactorización
 
-* **Adaptador (+25)**
-* **Puente (+35)**
-* **Compuesto (+30)**
-* **Decorador (+25)**
-* **Fachada (+20)**
-* **Peso Ligero (+40)**
-* **Proxy (+30)**
+1. **División de Responsabilidades:**
+   - Separar la lógica de validación de usuarios y la lógica de envío del formulario en funciones distintas. Considerar la creación de un servicio dedicado para la gestión del registro de usuarios.
 
-#### De comportamiento
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Facade para encapsular la lógica de interacción con `DataService` y `Router`, mejorando la mantenibilidad y la prueba del código.
 
-* **Cadena de Responsabilidad (+30)**
-* **Comando (+20)**
-* **Intérprete (+40)**
-* **Iterador (+15)**
-* **Mediador (+30)**
-* **Memento (+35)**
-* **Observador (+25)**
-* **Estado (+30)**
-* **Estrategia (+20)**
-* **Método Plantilla (+25)**
-* **Visitante (+35)**
+3. **Mejora del Manejo de Errores:**
+   - Mejorar el manejo de errores en la solicitud HTTP para proporcionar retroalimentación adecuada al usuario en caso de fallos, y considerar el uso de un servicio de notificación para manejar mensajes de éxito y error.
 
+4. **Uso de Formularios Reactivos:**
+   - Considerar el uso de `ReactiveFormsModule` para mejorar la gestión del estado y la validación del formulario.
+
+
+## Clase Analizada: `LoginComponent`
+
+### Descripción General
+
+La clase `LoginComponent` maneja la lógica del formulario de inicio de sesión. Permite a los usuarios iniciar sesión proporcionando un nombre de usuario y una contraseña. Utiliza servicios para interactuar con una API backend y para redirigir al usuario a la página de perfil una vez autenticado.
+
+### Identificación de Olores de Código
+
+#### Olores de Código
+
+1. **Función Grande (+1):**
+   - La función `onSubmit` contiene múltiples responsabilidades, incluyendo la validación de usuarios y la lógica de redirección.
+
+2. **Acoplamiento Fuerte (+1):**
+   - La lógica de enrutamiento y manejo de mensajes de error está acoplada directamente en la función `onSubmit`, lo que dificulta la reutilización y el mantenimiento.
+
+3. **Manejo de Errores Mínimo (+1):**
+   - El manejo de errores en la autenticación es básico y no proporciona retroalimentación adecuada al usuario en caso de fallos.
+
+#### Principios SOLID Violados
+
+1. **Principio de Responsabilidad Única (SRP) (+10):**
+   - La función `onSubmit` realiza múltiples tareas: validación de usuarios, autenticación, y manejo de redirección y mensajes de error.
+
+2. **Principio de Inversión de Dependencias (DIP) (+10):**
+   - La clase depende directamente de la implementación de `Router`, `AuthenticationService`, y `SessionService` en lugar de interfaces o abstracciones.
+
+#### Patrones de Diseño no Utilizados
+
+1. **Facade (+10):**
+   - Un patrón Facade podría encapsular la lógica de interacción con los servicios y el enrutador, simplificando el componente y mejorando la separación de responsabilidades.
+
+### Cálculo del Esfuerzo de Refactorización
+
+\[
+E(o, s, p) = E(3, 2, 1) = (1 + 1 + 1) + (10 + 10) + (10) = 33
+\]
+
+
+### Comentarios Adicionales
+
+- **Validación de Datos:**
+  - La validación de la existencia del usuario se realiza en el cliente, lo que puede ser ineficiente y propenso a condiciones de carrera si múltiples usuarios intentan iniciar sesión simultáneamente.
+
+- **Gestión de Estado:**
+  - La gestión del estado del formulario podría beneficiarse del uso de un formulario reactivo (`ReactiveFormsModule`) para mejorar la validación y manejo del estado del formulario.
+
+### Recomendaciones de Refactorización
+
+1. **División de Responsabilidades:**
+   - Separar la lógica de validación de usuarios y la lógica de redirección en funciones distintas. Considerar la creación de un servicio dedicado para la gestión de la autenticación de usuarios.
+
+2. **Uso de Patrones de Diseño:**
+   - Implementar el patrón Facade para encapsular la lógica de interacción con `AuthenticationService`, `SessionService` y `Router`, mejorando la mantenibilidad y la prueba del código.
+
+3. **Mejora del Manejo de Errores:**
+   - Mejorar el manejo de errores en la autenticación para proporcionar retroalimentación adecuada al usuario en caso de fallos, y considerar el uso de un servicio de notificación para manejar mensajes de error.
+
+4. **Uso de Formularios Reactivos:**
+   - Considerar el uso de `ReactiveFormsModule` para mejorar la gestión del estado y la validación del formulario.
 
 
 Este repositorio fue obtenido de: https://github.com/JosueRodriguezr/LP_Final
